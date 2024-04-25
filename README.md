@@ -2,7 +2,7 @@
 
 ## Análisis y Desarrollo de Software 
 
-### Centro de Procesos industriales y Construccion
+### Centro de Procesos Industriales y Construccion
 
 ___
 
