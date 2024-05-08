@@ -1,6 +1,6 @@
 # ADSO 2929061 B
 
-## Análisis y Desarrollo de Soft 
+## Análisis y Desarrollo de Softwre
 
 ### Centro de Procesos Industriales y Construccion
 
