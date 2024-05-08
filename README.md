@@ -1,6 +1,6 @@
 # ADSO 2929061 B
 
-## Análisis y Desarrollo de Software
+## Análisis y Desarrollo de Sof
 
 ### Centro de Procesos Industriales y Construccion
 
