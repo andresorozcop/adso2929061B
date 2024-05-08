@@ -1,11 +1,11 @@
 # ADSO 2929061 B
 
-## Análisis y Desarrollo de Software 
+## Análisis y Desarrollo de Soft 
 
 ### Centro de Procesos Industriales y Construccion
 
 ___
 
-![Invenible](https://tinyurl.com/3cckkthc)
+![Invencible](https://tinyurl.com/3cckkthc)
 
 [ADSO Files DRIVE](https://tinyurl.com/wnkk334u)
