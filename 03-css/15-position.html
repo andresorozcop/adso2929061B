@@ -7,7 +7,67 @@
     <link rel="stylesheet" href="../css/style.css">
     <style>
          main ul li {
-           color: #fffb;
+           color: #fff9;
+
+    }
+    div.parent {
+        border: 2px solid #0009;
+        background-color: #fff6;
+        margin: 2rem auto;
+        padding: 2rem;
+        position: relative;
+        min-height: 130px;
+        width: 200px;
+
+    }
+
+    div.child {
+        background-color: #0006;
+        color: #FFF9;
+        padding: 0.4rem;
+        
+        text-align: CENTER;
+        width: 80PX;
+
+    
+    }
+    div.relative {
+        position: relative;
+        top: -20px;
+        left: 130px;
+
+        
+
+
+    }
+    div.absolute{
+        position: absolute;
+        top: 1px;
+        left: 2px;
+
+    }
+    div.fixed {
+        position: fixed;
+        top: 680px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9;
+
+        
+    }
+    div.sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 20px;
+        width: 100%;
+
+
+
+    }
+    div.parent p {
+        
+        font-size: 0.8rem !important;
+        text-align: justify;
     }
     
    </style>
@@ -36,19 +96,19 @@
         
             <h3>Relative</h3>
             <div class="parent">
-<div class="child relative">BOX</div>
+<div class="child relative">BOX <small>Relative</small></div>
             </div>
             <h3>Absolute</h3>
             <div class="parent">
-                <div class="child absolute">BOX</div>
+                <div class="child absolute">BOX <small>Absolute</small></div>
                             </div>
             <h3>Fixed</h3>
             <div class="parent">
-                <div class="child fixed">BOX</div>
+                <div class="child fixed">BOX <small>Fixed</small></div>
                             </div>
             <h3>Sticky</h3>
             <div class="parent">
-                <div class="child sticky">BOX</div>
+                <div class="child sticky">BOX <small>Sticky</small></div>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt autem corrupti eaque sequi error obcaecati repellat mollitia, tempore dolorum cupiditate praesentium a sapiente eius sit, fuga fugit nam eligendi ducimus quaerat quia nemo iusto expedita sed rem. Quis velit omnis repudiandae eligendi ipsam facilis labore pariatur. Nemo porro hic nam tempore ipsam commodi debitis dicta quod. Eligendi beatae, nemo unde rem sint dignissimos cumque omnis mollitia suscipit perspiciatis aut, deserunt aliquam dicta consequuntur voluptatum harum. Neque officiis harum fugit, sunt rem laboriosam velit eligendi aperiam quam deleniti in, atque, voluptatem impedit repellat molestias assumenda veniam perferendis soluta? Eius voluptatem quo corporis labore voluptatibus odio blanditiis non animi! Incidunt perferendis delectus aspernatur facilis officia deserunt fugit repellendus impedit, eveniet mollitia inventore odio sed dolorem, earum quo quisquam dolore, iure alias iste laboriosam. Nostrum similique inventore illum illo error? Beatae quisquam ratione rem maiores quod, aliquid sequi ducimus earum et repellendus totam non temporibus accusamus odio obcaecati eveniet sit velit facilis dolorem corporis perferendis, error neque odit recusandae? Mollitia aliquid praesentium amet voluptatem nobis quisquam inventore perspiciatis ratione consequatur tenetur aspernatur, quo, quae consectetur incidunt dolores voluptatibus aperiam hic modi possimus. Libero quasi doloribus assumenda, quos amet est officia quibusdam veritatis pariatur?</p>
                             </div>
             
