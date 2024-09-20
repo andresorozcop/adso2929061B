@@ -1,341 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sprite</title>
-    <link rel="stylesheet" href="">
+    <title>23- Sprite</title>
+    <link rel="stylesheet" href="../css/style.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
-
-        body {
-            background-color: #17a053;
-            border: 8px solid white;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Poppins;
-            padding-bottom: 30px;
+            div#sprite {
+            background: url(images/anim-sprite.png) no-repeat;
+            height: 256px;
+            margin: 1rem auto;
+            width: 256px;
         }
-
-        nav {
-            position: fixed;
-            top: 15px;
-            left: 15px;
-
-            a:is(:link, :visited) {
-                background-color: #0009;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 40px;
-                opacity: .8;
-                transition: all 0.2s ease-in;
-                width: 40px;
-
-                svg {
-                    width: 24px;
-                }
-            }
-
-            a:is(:hover) {
-                opacity: 1;
-                transform: scale(1.12);
-            }
-        }
-
-        main {
-            /*border: 2px solid;*/
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 5px;
-
-            div.logo {
-                /*border: 2px solid;*/
-                background: url(images/spriteweb.png);
-                background-position: -10px -400px;
-                width: 190px;
-                height: 190px;
-                margin-inline: auto;
-            }
-
-            menu {
-                /*border: 2px solid;*/
-                display: flex;
-                justify-content: space-between;
-                margin-inline: auto;
-                align-items: center;
-                gap: 1.5rem;
-                cursor: pointer;
-                width: 47.5%;
-
-                a:is(:link, :visited) {
-                    text-align: center;
-                    text-decoration: none;
-                    font-size: 1rem;
-                    background-color: #006423;
-                    border-bottom: 10px solid white;
-                    padding: 0.5rem;
-                    flex-grow: 1;
-                    color: rgba(255, 255, 255, 0.907);
-                    transition: all 0.3s ease-in;
-                    text-transform: uppercase;
-                }
-
-                a:is(:hover),
-                a.active {
-                    background-color: #013111;
-                    border-bottom: 10px solid #f9e537;
-                    color: rgba(255, 255, 255, 0.907);
-                    opacity: 1;
-                }
-            }
-        }
-
-
-        section {
-            /*border: 2px solid;*/
-            margin-bottom: 20px;
-            display: flex;
-            margin-inline: auto;
-            align-items: center;
-            justify-content: center;
-            background-color: #006423;
-            width: 51%;
-            height: 260px;
-
-            figure.img {
-                border: 3px solid;
-                border-color: rgba(248, 248, 248, 0.9);
-                background: url(images/spriteweb.png) no-repeat;
-                background-position: -500px -10px;
-                width: 320px;
-                height: 195px;
-                margin-inline: auto;
-                margin: 1rem;
-
-                button {
-                    text-align: center;
-                    font-weight: bold;
-                    font-size: 1.1rem;
-                    color: black;
-                    background-color: rgba(255, 255, 255, 0.485);
-                    width: 100%;
-                    height: 65px;
-                    border: none;
-                    cursor: pointer;
-                    transition: all 0.1s ease-in;
-                }
-
-                button:hover,
-                button.active {
-                    background-color: rgba(255, 251, 251, 0.873);
-                    color: black;
-                }
-            }
-        }
-
-        section.contener {
-            /*border: 2px solid;*/
-            border: 10px solid #006423;
-            margin-bottom: 20px;
-            background-color: #ffffff;
-            display: flex;
-            margin-inline: auto;
-            align-items: center;
-            justify-content: space-between;
-            flex-direction: column;
-            width: 50%;
-            height: auto;
-
-            div.cont {
-                display: flex;
-                margin-inline: auto;
-                padding: auto;
-                align-items: center;
-                justify-content: center;
-
-                aside.img2 {
-                    /*border: 2px solid;*/
-                    background: url(images/spriteweb.png);
-                    background-position: -295px 100px;
-                    width: 180px;
-                    height: 90px;
-                    margin-inline: auto;
-                    margin: 3rem;
-                    transition: transform 0.5s ease;
-                    transform-style: preserve-3d;
-                    perspective: 100px;
-                }
-
-                aside.img2:hover {
-                    transform: rotateY(360deg);
-                }
-
-                p {
-                    /*border: 2px solid;*/
-                    text-align: justify;
-                    font-size: 1rem;
-                    width: 120%;
-                    line-height: 2;
-                    color: rgb(41, 39, 39);
-                    transition: all 0.2s ease-in-out;
-                    cursor: pointer;
-                }
-
-                p:hover {
-                    color: #059337;
-                }
-
-                aside.img3 {
-                    /*border: 2px solid;*/
-                    background: url(images/spriteweb.png);
-                    background-position: -83px -205px;
-                    width: 230px;
-                    height: 170px;
-                    margin-inline: auto;
-                    margin: 3rem;
-                }
-            }
-
-            div.linea1 {
-                border-bottom: 10px solid #006423;
-            }
-
-            div.linea2 {
-                border-top: 10px solid #006423;
-            }
-        }
-
-        footer {
-            /*border: 2px, solid;*/
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-inline: auto;
-            width: 51%;
-            height: auto;
-            background-color: #ffffff;
-
-            div.logo2 {
-                /*border: 2px solid;*/
-                margin-inline: auto;
-                background: url(images/spriteweb.png);
-                background-position: -500px -420px;
-                width: 265px;
-                height: 185px;
-            }
-
-            menu {
-                /*border: 2px solid;*/
-                display: flex;
-                margin-inline: auto;
-                align-items: center;
-                justify-content: center;
-                gap: 1.5rem;
-                cursor: pointer;
-                width: 95%;
-
-                a:is(:link, :visited) {
-                    text-align: center;
-                    text-decoration: none;
-                    font-size: 1rem;
-                    background-color: #ffffff;
-                    border-bottom: 10px solid white;
-                    padding: 1rem;
-                    width: 100%;
-                    color: rgba(12, 12, 12, 0.907);
-                    transition: all 0.3s ease-in;
-                    text-transform: uppercase;
-                }
-
-                a:is(:hover),
-                a.active {
-                    border-bottom: 8px solid #006423;
-                }
-            }
-        }
-    </style>
+        div#sprite.sp1 { background-position: calc(-256px * 0) 0; }
+        div#sprite.sp2 { background-position: calc(-256px * 1) 0; }
+        div#sprite.sp3 { background-position: calc(-256px * 2) 0; }
+        div#sprite.sp4 { background-position: calc(-256px * 3) 0; }
+        div#sprite.sp5 { background-position: calc(-256px * 4) 0; }
+        div#sprite.sp6 { background-position: calc(-256px * 5) 0; }    
+    
+   </style>
 </head>
-
-<body>
+<body class="css">
     <nav>
         <a href="index.html">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                <path fill="#edeff3"
-                    d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
-            </svg>
-
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
         </a>
     </nav>
     <main>
-        <div class="logo"></div>
-        <menu>
-            <a href="">INICIO</a>
-            <a href="">NOSOTROS</a>
-            <a href="">PORTAFOLIO</a>
-            <a href="">SERVICIOS</a>
-            <a href="">CONTACTO</a>
-        </menu>
+        <header>
+            <h1>23- Sprite</h1>
+            <p>
+                An image sprite is a collection of images put into a single image.
+            </p>
+        </header>
+        <section>
+            <div id="sprite" class="sp1"></div>
+        </section>
     </main>
-    <section>
-        <figure class="img">
-            <button>SPRITE 01</button>
-        </figure>
-        <figure class="img">
-            <button>SPRITE 02</button>
-        </figure>
-        <figure class="img">
-            <button>SPRITE 03</button>
-        </figure>
-    </section>
-    <section class="contener">
-        <div class="cont linea1">
-            <aside class="img2"></aside>
-            <p>Eligendi nemo nam exercitationem recusandae
-                officia possimus atque modi maiores magnam adipisci laboriosam, porro eum laborum debitis quo
-                aliquid molestiae nesciunt repellendus!
-                Incidunt tenetur accusamus assumenda velit fugiat possimus temporibus iusto quibusdam. Provident
-                asperiores laborum amet debitis, itaque ab facere exercitationem veritatis cupiditate! Suscipit
-                laboriosam adipisci vero commodi nemo ducimus.</p>
-            <aside class="img3"></aside>
-        </div>
-        <div class="cont">
-            <aside class="img2"></aside>
-            <p>Eligendi nemo nam exercitationem recusandae
-                officia possimus atque modi maiores magnam adipisci laboriosam, porro eum laborum debitis quo
-                aliquid molestiae nesciunt repellendus!
-                Incidunt tenetur accusamus assumenda velit fugiat possimus temporibus iusto quibusdam. Provident
-                asperiores laborum amet debitis, itaque ab facere exercitationem veritatis cupiditate! Suscipit
-                laboriosam adipisci vero commodi nemo ducimus.</p>
-            <aside class="img3"></aside>
-        </div>
-        <div class="cont linea2">
-            <aside class="img2"></aside>
-            <p>Eligendi nemo nam exercitationem recusandae
-                officia possimus atque modi maiores magnam adipisci laboriosam, porro eum laborum debitis quo
-                aliquid molestiae nesciunt repellendus!
-                Incidunt tenetur accusamus assumenda velit fugiat possimus temporibus iusto quibusdam. Provident
-                asperiores laborum amet debitis, itaque ab facere exercitationem veritatis cupiditate! Suscipit
-                laboriosam adipisci vero commodi nemo ducimus.</p>
-            <aside class="img3"></aside>
-        </div>
-    </section>
-    <footer>
-        <div class="logo2"></div>
-        <menu>
-            <a href="">INICIO</a>
-            <a href="">NOSOTROS</a>
-            <a href="">PORTAFOLIO</a>
-            <a href="">SERVICIOS</a>
-            <a href="">CONTACTO</a>
-        </menu>
-    </footer>
-
+    <script>
+        const sprite    = document.getElementById('sprite')
+        const numSprite = 6
+        let count       = 1
+        setInterval(() => {
+            sprite.className = ''
+            sprite.classList.add('sp' + count)
+            if (count == numSprite) {
+                count = 1
+            } else {
+                count++
+            }
+        }, 0
+)
+    </script>
 </body>
-
 </html>
