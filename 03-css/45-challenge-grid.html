@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>00- Template</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+       main {
+  display: grid;
+  place-items: center;
+  /*
+  grid-template-columns: repeat(3, 140px);
+  grid-template-rows: repeat(3, 140px);
+  */
+  grid-template-areas: 
+      "img01 img02 img03"
+      "img04 img02 img05"
+      "img06 img06 img07";
+  margin: 2rem auto;
+  width: calc(140px * 3);
+  gap: 0.2rem;
+}
+
+main img {
+  object-fit: cover;
+  height: 140px;
+  width: 140px;
+}
+
+img.img01 {
+  grid-area: img01;
+}
+img.img02 {
+  grid-area: img02;
+  height: calc(140px * 2);
+}
+img.img03 {
+  grid-area: img03;
+}
+img.img04 {
+  grid-area: img04;
+}
+img.img05 {
+  grid-area: img05;
+}
+img.img06 {
+  grid-area: img06;
+  width: calc(140px * 2);
+}
+img.img07 {
+  grid-area: img07;
+}
+    
+    
+   </style>
+</head>
+<body>
+    <main>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcYDnv5q4c5UuxkackZdlDv2uxjhAHRr3wJg&s" class="img01">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcYDnv5q4c5UuxkackZdlDv2uxjhAHRr3wJg&s" class="img02">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcYDnv5q4c5UuxkackZdlDv2uxjhAHRr3wJg&s" class="img03">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcYDnv5q4c5UuxkackZdlDv2uxjhAHRr3wJg&s" class="img04">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcYDnv5q4c5UuxkackZdlDv2uxjhAHRr3wJg&s" class="img05">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcYDnv5q4c5UuxkackZdlDv2uxjhAHRr3wJg&s" class="img06">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcYDnv5q4c5UuxkackZdlDv2uxjhAHRr3wJg&s" class="img07">
+      </main>
+</body>
+</html>
