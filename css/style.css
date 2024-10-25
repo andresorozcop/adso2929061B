@@ -284,3 +284,26 @@ body.css {
         }
     }
 }
+/* - - - - - - - - - - - - - - */
+/*PUG*/
+/* - - - - - - - - - - - - - - */
+body.pug {
+    background-color: #DFD090;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 100 60'%3E%3Cg %3E%3Crect fill='%23DFD090' width='11' height='11'/%3E%3Crect fill='%23ddce8e' x='10' width='11' height='11'/%3E%3Crect fill='%23dbcb8c' y='10' width='11' height='11'/%3E%3Crect fill='%23d9c98b' x='20' width='11' height='11'/%3E%3Crect fill='%23d7c789' x='10' y='10' width='11' height='11'/%3E%3Crect fill='%23d5c587' y='20' width='11' height='11'/%3E%3Crect fill='%23d3c286' x='30' width='11' height='11'/%3E%3Crect fill='%23d1c084' x='20' y='10' width='11' height='11'/%3E%3Crect fill='%23cfbe82' x='10' y='20' width='11' height='11'/%3E%3Crect fill='%23cdbb80' y='30' width='11' height='11'/%3E%3Crect fill='%23cbb97f' x='40' width='11' height='11'/%3E%3Crect fill='%23c9b77d' x='30' y='10' width='11' height='11'/%3E%3Crect fill='%23c7b57b' x='20' y='20' width='11' height='11'/%3E%3Crect fill='%23c5b27a' x='10' y='30' width='11' height='11'/%3E%3Crect fill='%23c3b078' y='40' width='11' height='11'/%3E%3Crect fill='%23c1ae76' x='50' width='11' height='11'/%3E%3Crect fill='%23bfac74' x='40' y='10' width='11' height='11'/%3E%3Crect fill='%23bdaa73' x='30' y='20' width='11' height='11'/%3E%3Crect fill='%23bba771' x='20' y='30' width='11' height='11'/%3E%3Crect fill='%23b9a56f' x='10' y='40' width='11' height='11'/%3E%3Crect fill='%23b7a36e' y='50' width='11' height='11'/%3E%3Crect fill='%23b5a16c' x='60' width='11' height='11'/%3E%3Crect fill='%23b39f6b' x='50' y='10' width='11' height='11'/%3E%3Crect fill='%23b19c69' x='40' y='20' width='11' height='11'/%3E%3Crect fill='%23af9a67' x='30' y='30' width='11' height='11'/%3E%3Crect fill='%23ad9866' x='20' y='40' width='11' height='11'/%3E%3Crect fill='%23ab9664' x='10' y='50' width='11' height='11'/%3E%3Crect fill='%23a99462' x='70' width='11' height='11'/%3E%3Crect fill='%23a79261' x='60' y='10' width='11' height='11'/%3E%3Crect fill='%23a5905f' x='50' y='20' width='11' height='11'/%3E%3Crect fill='%23a38d5e' x='40' y='30' width='11' height='11'/%3E%3Crect fill='%23a18b5c' x='30' y='40' width='11' height='11'/%3E%3Crect fill='%239f895a' x='20' y='50' width='11' height='11'/%3E%3Crect fill='%239d8759' x='80' width='11' height='11'/%3E%3Crect fill='%239b8557' x='70' y='10' width='11' height='11'/%3E%3Crect fill='%23998356' x='60' y='20' width='11' height='11'/%3E%3Crect fill='%23978154' x='50' y='30' width='11' height='11'/%3E%3Crect fill='%23957f53' x='40' y='40' width='11' height='11'/%3E%3Crect fill='%23937d51' x='30' y='50' width='11' height='11'/%3E%3Crect fill='%23917b50' x='90' width='11' height='11'/%3E%3Crect fill='%238f794e' x='80' y='10' width='11' height='11'/%3E%3Crect fill='%238d774d' x='70' y='20' width='11' height='11'/%3E%3Crect fill='%238b754b' x='60' y='30' width='11' height='11'/%3E%3Crect fill='%23897249' x='50' y='40' width='11' height='11'/%3E%3Crect fill='%23877048' x='40' y='50' width='11' height='11'/%3E%3Crect fill='%23856e46' x='90' y='10' width='11' height='11'/%3E%3Crect fill='%23836c45' x='80' y='20' width='11' height='11'/%3E%3Crect fill='%23816a43' x='70' y='30' width='11' height='11'/%3E%3Crect fill='%237f6842' x='60' y='40' width='11' height='11'/%3E%3Crect fill='%237d6640' x='50' y='50' width='11' height='11'/%3E%3Crect fill='%237b643f' x='90' y='20' width='11' height='11'/%3E%3Crect fill='%2379623e' x='80' y='30' width='11' height='11'/%3E%3Crect fill='%2377613c' x='70' y='40' width='11' height='11'/%3E%3Crect fill='%23755f3b' x='60' y='50' width='11' height='11'/%3E%3Crect fill='%23735d39' x='90' y='30' width='11' height='11'/%3E%3Crect fill='%23715b38' x='80' y='40' width='11' height='11'/%3E%3Crect fill='%236f5936' x='70' y='50' width='11' height='11'/%3E%3Crect fill='%236d5735' x='90' y='40' width='11' height='11'/%3E%3Crect fill='%236b5533' x='80' y='50' width='11' height='11'/%3E%3Crect fill='%23695332' x='90' y='50' width='11' height='11'/%3E%3C/g%3E%3C/svg%3E");
+background-attachment: fixed;
+background-size: cover;
+    main {
+        header {
+            img {
+                border-color: var(--color-1);
+            }
+        }
+        menu {
+            a {
+                span {
+                    background-color: #56332b;
+                }
+            }
+        }
+    }
+}
