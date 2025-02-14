@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Bootstrap sin JS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+ 
+    <style>
+    
+        @media (max-width: 991px) {
+            #nav-toggle:checked ~ nav .navbar-collapse {
+                display: block !important;
+            }
+            
+            .navbar-collapse {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #212529;
+                padding: 1rem;
+            }
+        }
+        body nav div img {
+            width: 20px;
+            height: 20px;
+            margin:auto 5px auto auto;
+            
+        }
+        body nav div a {
+            margin:auto auto auto 5px;
+        }
+    </style>
+</head>
+<body>
+  
+    <input type="checkbox" class="d-none" id="nav-toggle">
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <img src="/images/perfil.png" alt="">
+            <a class="navbar-brand" href="#">Andres Orozco</a>
+            
+       
+            <label class="navbar-toggler border" for="nav-toggle">
+                <span class="navbar-toggler-icon"></span>
+            </label>
+            
+           
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Portafolio</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

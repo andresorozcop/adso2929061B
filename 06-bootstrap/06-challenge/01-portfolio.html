@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Hamburguesa CSS</title>
+    <style>
+        /* Reseteo básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilos del nav */
+        .nav {
+            background: #333;
+            padding: 1rem;
+            position: relative;
+        }
+
+        /* Ocultar checkbox */
+        .nav-toggle {
+            display: none;
+        }
+
+        /* Estilos del botón hamburguesa */
+        .nav-toggle-label {
+            position: absolute;
+            top: 0;
+            right: 1rem;
+            display: flex;
+            height: 100%;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        /* Crear las líneas del ícono hamburguesa */
+        .hamburger {
+            width: 30px;
+            height: 3px;
+            background: white;
+            position: relative;
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background: white;
+        }
+
+        .hamburger::before {
+            top: -8px;
+        }
+
+        .hamburger::after {
+            bottom: -8px;
+        }
+
+        /* Estilos del menú */
+        .nav-menu {
+            display: none;
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .nav-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Mostrar menú cuando el checkbox está marcado */
+        .nav-toggle:checked ~ .nav-menu {
+            display: block;
+        }
+
+        /* Estilos para pantallas grandes */
+        @media screen and (min-width: 768px) {
+            .nav-toggle-label {
+                display: none;
+            }
+
+            .nav-menu {
+                display: flex;
+                margin-top: 0;
+                justify-content: flex-end;
+            }
+
+            .nav-menu li {
+                margin: 0 0 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <!-- Checkbox oculto que controla el menú -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        
+        <!-- Etiqueta que funciona como botón hamburguesa -->
+        <label for="nav-toggle" class="nav-toggle-label">
+            <span class="hamburger"></span>
+        </label>
+
+        <!-- Menú de navegación -->
+        <ul class="nav-menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Portafolio</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
