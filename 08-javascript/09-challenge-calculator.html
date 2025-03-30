@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09-challenge-calculator</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        main ul li {
+            color: #fffb;
+        }
+
+        .calculator-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .calculator {
+            background-color: var(--calc-bg);
+            padding: 1.25rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 320px;
+        }
+
+        .theme-toggle-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .theme-toggle {
+            width: 70px;
+            height: 34px;
+            background-color: var(--toggle-bg);
+            border-radius: 17px;
+            position: relative;
+            cursor: pointer;
+            padding: 0 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .theme-toggle::before {
+            content: "";
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background-color: white;
+            top: 4px;
+        }
+
+        [data-theme="light"] .theme-toggle::before {
+            left: 4px;
+        }
+
+        [data-theme="dark"] .theme-toggle::before {
+            right: 4px;
+        }
+
+        .theme-toggle .icon {
+            width: var(--toggle-icon-size);
+            height: var(--toggle-icon-size);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .theme-toggle .sun {
+            margin-left: 4px;
+        }
+
+        .theme-toggle .moon {
+            margin-right: 4px;
+        }
+
+        .theme-toggle img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .display-container {
+            background-color: var(--display-bg);
+            padding: 0.75rem;
+            margin-bottom: 1.25rem;
+            border-radius: 10px;
+        }
+
+        .operation-display {
+            height: 20px;
+            color: var(--display-text);
+            text-align: right;
+            font-family: 'Digital-7', monospace;
+            font-size: 16px;
+            margin-bottom: 5px;
+            overflow: hidden;
+        }
+
+        .result-display {
+            height: 40px;
+            color: var(--display-text);
+            text-align: right;
+            font-family: 'Digital-7', monospace;
+            font-size: 32px;
+            overflow: hidden;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding: 0.5rem;
+        }
+
+        .button {
+            background-color: var(--button-bg);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--button-text);
+            box-shadow: 0 4px 8px var(--button-shadow);
+        }
+
+        .button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px var(--button-shadow);
+        }
+
+        @font-face {
+            font-family: 'Digital-7';
+            src: url('https://fonts.cdnfonts.com/css/digital-7-mono') format('truetype');
+        }
+
+        :root {
+            --bg-color: #333333;
+            --calc-bg: #444444;
+            --display-bg: #1a2f2f;
+            --display-text: #32CD32;
+            --button-bg: #555555;
+            --button-shadow: rgba(0, 0, 0, 0.2);
+            --button-text: #ffffff;
+            --toggle-bg: #666666;
+            --toggle-icon-size: 16px;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f5f5f5;
+            --calc-bg: #e0e0e0;
+            --display-bg: #2a4747;
+            --button-bg: #ffffff;
+            --button-shadow: rgba(0, 0, 0, 0.1);
+            --button-text: #333333;
+            --toggle-bg: #cccccc;
+        }
+    </style>
+</head>
+<body class="js">
+    <nav>
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+        </a>
+    </nav>
+    <main>
+        <header>
+            <h1>09-challenge-calculator</h1>
+            <p>Build a basic calculator using JavaScript.</p>
+        </header>
+        <section class="calculator-container">
+            <div class="calculator" data-theme="dark">
+                <div class="theme-toggle-container">
+                    <div class="theme-toggle" id="theme-toggle">
+                        <span class="icon sun">
+                            <img src="../images/sun-svgrepo-com (1).svg" alt="Light mode">
+                        </span>
+                        <span class="icon moon">
+                            <img src="../images/moon-svgrepo-com (1).svg" alt="Dark mode">
+                        </span>
+                    </div>
+                </div>
+                <div class="display-container">
+                    <div class="operation-display" id="operation"></div>
+                    <div class="result-display" id="result">0</div>
+                </div>
+                <div class="buttons">
+                    <button class="button">C</button>
+                    <button class="button">%</button>
+                    <button class="button">⌫</button>
+                    <button class="button">÷</button>
+                    <button class="button">7</button>
+                    <button class="button">8</button>
+                    <button class="button">9</button>
+                    <button class="button">×</button>
+                    <button class="button">4</button>
+                    <button class="button">5</button>
+                    <button class="button">6</button>
+                    <button class="button">-</button>
+                    <button class="button">1</button>
+                    <button class="button">2</button>
+                    <button class="button">3</button>
+                    <button class="button">+</button>
+                    <button class="button">±</button>
+                    <button class="button">0</button>
+                    <button class="button">.</button>
+                    <button class="button">=</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script>
+        const operation = document.getElementById('operation');
+        const result = document.getElementById('result');
+        const buttons = document.querySelectorAll('.button');
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        let currentOperation = '';
+        let currentResult = '';
+        let shouldResetDisplay = false;
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            document.querySelector('.calculator').setAttribute('data-theme', 'light');
+        }
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            document.querySelector('.calculator').setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        });
+
+        themeToggle.addEventListener('click', () => {
+            const calculator = document.querySelector('.calculator');
+            const currentTheme = calculator.getAttribute('data-theme');
+            calculator.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
+        function formatNumber(num) {
+            if (!num) return '0';
+            const parts = num.toString().split('.');
+            parts[0] = parts[0].replace(/^-/, '').replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return (num < 0 ? '-' : '') + parts.join('.');
+        }
+
+        function getCurrentNumber() {
+            const parts = currentOperation.split(/([+\-×÷])/);
+            const lastNum = parts[parts.length - 1] || '';
+            return lastNum.replace(/,/g, '');
+        }
+
+        function updateCurrentNumber(newNum) {
+            const parts = currentOperation.split(/([+\-×÷])/);
+            if (parts.length > 0) {
+                parts[parts.length - 1] = formatNumber(parseFloat(newNum));
+                currentOperation = parts.join('');
+                operation.textContent = currentOperation;
+            }
+        }
+
+        function formatOperation() {
+            if (!currentOperation) return;
+            const parts = currentOperation.split(/([+\-×÷])/);
+            for (let i = 0; i < parts.length; i++) {
+                if (parts[i] && !['+', '-', '×', '÷'].includes(parts[i])) {
+                    const num = parseFloat(parts[i].replace(/,/g, ''));
+                    if (!isNaN(num)) {
+                        parts[i] = formatNumber(num);
+                    }
+                }
+            }
+            currentOperation = parts.join('');
+            operation.textContent = currentOperation;
+        }
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const value = button.textContent;
+
+                if (value === 'C') {
+                    currentOperation = '';
+                    currentResult = '';
+                    operation.textContent = '';
+                    result.textContent = '0';
+                } else if (value === '=') {
+                    try {
+                        if (currentOperation) {
+                            const evalOperation = currentOperation.replace(/,/g, '').replace('×', '*').replace('÷', '/');
+                            currentResult = eval(evalOperation).toString();
+                            result.textContent = formatNumber(currentResult);
+                            currentOperation = formatNumber(currentResult);
+                            operation.textContent = currentOperation;
+                            shouldResetDisplay = true;
+                        }
+                    } catch (error) {
+                        result.textContent = 'Error';
+                    }
+                } else if (value === '±') {
+                    const currentNum = getCurrentNumber();
+                    if (currentNum) {
+                        const num = parseFloat(currentNum);
+                        if (!isNaN(num)) {
+                            updateCurrentNumber((-num).toString());
+                        }
+                    } else if (!currentOperation) {
+                        currentOperation = '-';
+                        operation.textContent = currentOperation;
+                    }
+                } else if (value === '%') {
+                    const currentNum = getCurrentNumber();
+                    if (currentNum) {
+                        const parts = currentOperation.split(/([+\-×÷])/);
+                        let percent = parseFloat(currentNum) / 100;
+                        if (parts.length > 1) {
+                            const baseNumber = parseFloat(parts[parts.length - 3].replace(/,/g, ''));
+                            percent *= baseNumber;
+                        }
+                        updateCurrentNumber(percent.toString());
+                    }
+                } else if (value === '⌫') {
+                    if (currentOperation.length > 0) {
+                        currentOperation = currentOperation.slice(0, -1);
+                        formatOperation();
+                    }
+                } else {
+                    if (shouldResetDisplay) {
+                        currentOperation = currentResult;
+                        shouldResetDisplay = false;
+                    }
+                    if (/[0-9.]/.test(value)) {
+                        const currentNum = getCurrentNumber();
+                        if (currentNum === '0' && value !== '.') {
+                            currentOperation = currentOperation.slice(0, -1);
+                        }
+                        currentOperation += value;
+                        formatOperation();
+                    } else if (value === '-' && !currentOperation) {
+                        currentOperation = '-';
+                        operation.textContent = currentOperation;
+                    } else if (!/[+\-×÷]$/.test(currentOperation)) {
+                        currentOperation += value;
+                        operation.textContent = currentOperation;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
