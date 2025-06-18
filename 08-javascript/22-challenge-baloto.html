@@ -57,17 +57,31 @@ body {
   z-index: 2;
 }
 #logo-container {
+<<<<<<< HEAD
   width: 440px;
   height: 128px;
+=======
+  width: 220px;
+  height: 64px;
+>>>>>>> 2128d4b49b62f6f6a78d4f07f3f00790eec7e0f3
   background-image: url('../images/logobaloto.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+<<<<<<< HEAD
   margin: 0 auto;
   position: absolute;
   left: 50%;
   top: 18px;
   transform: translateX(-50%);
+=======
+  margin: 36px auto 0 auto;
+  position: relative;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  right: 0;
+>>>>>>> 2128d4b49b62f6f6a78d4f07f3f00790eec7e0f3
   z-index: 3;
   display: flex;
   justify-content: center;
@@ -76,12 +90,18 @@ body {
 #balotas-container {
   display: flex;
   justify-content: center;
+<<<<<<< HEAD
   align-items: flex-start;
   gap: 4px;
+=======
+  align-items: center;
+  gap: 32px;
+>>>>>>> 2128d4b49b62f6f6a78d4f07f3f00790eec7e0f3
   margin: 0;
   position: absolute;
   left: 0;
   right: 0;
+<<<<<<< HEAD
   top: calc(128px - 9.2em);
   z-index: 3;
 }
@@ -94,6 +114,15 @@ body {
 .balota, .superbalota {
   width: 177px;
   height: 177px;
+=======
+  top: 110px;
+  z-index: 3;
+}
+.balota {
+  width: 72px;
+  height: 72px;
+  background-image: url('../images/balota1.png');
+>>>>>>> 2128d4b49b62f6f6a78d4f07f3f00790eec7e0f3
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -101,6 +130,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+<<<<<<< HEAD
   box-shadow: none;
   position: relative;
   font-size: 2rem;
@@ -144,10 +174,25 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+=======
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 1px 2px 6px #000b;
+  transform: scale(0);
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px #0006;
+}
+#superbalota-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+>>>>>>> 2128d4b49b62f6f6a78d4f07f3f00790eec7e0f3
   margin: 0;
   position: absolute;
   left: 0;
   right: 0;
+<<<<<<< HEAD
   top: calc(220px - 3.5em);
   z-index: 3;
 }
@@ -175,6 +220,55 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+=======
+  top: 210px;
+  z-index: 3;
+}
+.superbalota {
+  width: 88px;
+  height: 88px;
+  background-image: url('../images/balota2.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-shadow: 1px 2px 6px #000b;
+  transform: scale(0);
+  box-shadow: 0 2px 12px #0008;
+}
+#play-button {
+  width: 200px;
+  height: 56px;
+  background-image: url('../images/boton.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 420px;
+  margin-bottom: 32px;
+  transition: filter 0.2s, box-shadow 0.2s, transform 0.1s;
+  text-shadow: 2px 3px 8px #000b;
+  display: block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  box-shadow: 0 4px 24px #0006, 0 1.5px 0 #fff4 inset;
+  border-radius: 28px;
+  letter-spacing: 1px;
+>>>>>>> 2128d4b49b62f6f6a78d4f07f3f00790eec7e0f3
 }
 #play-button:active {
   filter: brightness(0.95);
@@ -190,7 +284,12 @@ body {
   70% { transform: scale(1.1); }
   100% { transform: scale(1); }
 }
+<<<<<<< HEAD
 .balota.visible, .superbalota.visible {
+=======
+.balota.visible,
+.superbalota.visible {
+>>>>>>> 2128d4b49b62f6f6a78d4f07f3f00790eec7e0f3
   animation: pop-in 0.4s cubic-bezier(.68,-0.55,.27,1.55) forwards;
   transform: scale(1);
 }
@@ -231,6 +330,7 @@ body {
         </section>
     </main>
     <script>
+<<<<<<< HEAD
 // Función para generar un número aleatorio entre min y max (incluidos)
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -256,12 +356,19 @@ function balotoNumbers() {
 
 function mostrarBaloto() {
   var balotas = [
+=======
+// Función principal para realizar el sorteo de Baloto
+function realizarSorteo() {
+  const playButton = document.getElementById('play-button');
+  const balotas = [
+>>>>>>> 2128d4b49b62f6f6a78d4f07f3f00790eec7e0f3
     document.getElementById('balota-1'),
     document.getElementById('balota-2'),
     document.getElementById('balota-3'),
     document.getElementById('balota-4'),
     document.getElementById('balota-5')
   ];
+<<<<<<< HEAD
   var superbalota = document.getElementById('superbalota');
   var resultado = balotoNumbers();
   for (var i = 0; i < balotas.length; i++) {
@@ -287,6 +394,52 @@ function mostrarBaloto() {
 }
 
 document.getElementById('play-button').onclick = mostrarBaloto;
+=======
+  const superbalota = document.getElementById('superbalota');
+
+  // Desactivar el botón mientras se realiza el sorteo
+  playButton.disabled = true;
+
+  // Limpiar y ocultar balotas anteriores
+  balotas.forEach(balota => {
+    balota.classList.remove('visible');
+    balota.textContent = '';
+  });
+  superbalota.classList.remove('visible');
+  superbalota.textContent = '';
+
+  // Generar 5 números únicos entre 1 y 43
+  const numeros = [];
+  while (numeros.length < 5) {
+    const n = Math.floor(Math.random() * 43) + 1;
+    if (!numeros.includes(n)) {
+      numeros.push(n);
+    }
+  }
+  numeros.sort((a, b) => a - b); // Opcional: ordenar los números
+
+  // Generar Superbalota entre 1 y 16
+  const numeroSuperbalota = Math.floor(Math.random() * 16) + 1;
+
+  // Mostrar balotas principales una a una con animación
+  balotas.forEach((balota, i) => {
+    setTimeout(() => {
+      balota.textContent = numeros[i];
+      balota.classList.add('visible');
+    }, 500 * i);
+  });
+
+  // Mostrar la Superbalota después de las principales
+  setTimeout(() => {
+    superbalota.textContent = numeroSuperbalota;
+    superbalota.classList.add('visible');
+    // Reactivar el botón después de mostrar la Superbalota
+    playButton.disabled = false;
+  }, 500 * balotas.length);
+
+  // Nota: Si quieres un sonido o efecto extra, puedes agregarlo aquí.
+}
+>>>>>>> 2128d4b49b62f6f6a78d4f07f3f00790eec7e0f3
     </script>
 </body>
 </html>

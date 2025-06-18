@@ -1,0 +1,190 @@
+ 
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challengue conditionals</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        main ul li {
+           color: #fffb;
+        }
+        .weather {
+            color: #222;
+            padding: 30px 20px 30px 20px;
+            border-radius: 20px;
+            max-width: 350px;
+            margin: 30px auto;
+            min-height: 480px;
+            box-shadow: 0 0 20px #0002;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .weather-info {
+            text-align: center;
+            width: 100%;
+        }
+        .weather-temp {
+            font-size: 4em;
+            font-weight: bold;
+            margin: 10px 0 0 0;
+        }
+        .weather-location {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 0.2em;
+        }
+        .weather-country {
+            font-size: 1.1em;
+            margin-bottom: 0.2em;
+        }
+        .weather-date {
+            font-size: 1em;
+            margin-bottom: 0.5em;
+        }
+        .weather-icon {
+            width: 80px;
+            height: 80px;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        .weather-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 1em;
+        }
+        .weather-blur {
+            background: rgba(255,255,255,0.7);
+            border-radius: 12px;
+            padding: 8px 16px;
+            margin: 8px auto;
+            display: inline-block;
+        }
+        .weather-temp-blur {
+            background: rgba(255,255,255,0.8);
+            border-radius: 16px;
+            padding: 12px 30px;
+            margin: 12px auto 0 auto;
+            display: inline-block;
+            font-size: 4em;
+            font-weight: bold;
+        }
+        .weather-details-blur {
+            background: rgba(255,255,255,0.7);
+            border-radius: 10px;
+            padding: 8px 16px;
+            margin: 16px auto 0 auto;
+            display: flex;
+            justify-content: space-between;
+            max-width: 250px;
+        }
+        @media (max-width: 400px) {
+            .weather {
+                max-width: 98vw;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="js">
+    <nav>
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+        </a>
+    </nav>
+    <main>
+        <header>
+            <h1>Challengue conditionals</h1>
+            <p>
+                Solve problems using conditional logic
+            </p>
+        </header>
+        <section>
+            <div style="text-align:center; margin-bottom: 20px;">
+                <input type="text" id="city-input" placeholder="">
+                <button id="search-btn" style="padding:8px 16px; border-radius:5px; border:none; background:#444; color:white; cursor:pointer;">Buscar</button>
+            </div>
+            <figure class="weather" id="weather-widget">
+                <div class="weather-info">
+                    <div id="country" class="weather-country">Colombia</div>
+                    <div id="city" class="weather-location">Manizales</div>
+                    <div id="date" class="weather-date">2024-11-15 10:57</div>
+                    <img id="weather-icon" class="weather-icon" src="" alt="icono clima">
+                    <div class="weather-temp"><span id="temperature">18</span>°</div>
+                    <div id="condition-text" class="weather-blur" style="margin:10px 0; font-size:1.2em;">Condition: Fog</div>
+                    <div class="weather-details-blur">
+                        <div id="humidity">Humidity: 83</div>
+                        <div id="cloud">Cloud: 75</div>
+                    </div>
+                </div>
+            </figure>   
+        </section>
+    </main>
+    <script>
+        //Elements
+        const cityElement = document.getElementById('city');
+        const countryElement = document.getElementById('country');
+        const temperatureElement = document.getElementById('temperature');
+        const conditionTextElement = document.getElementById('condition-text');
+        const humidityElement = document.getElementById('humidity');
+        const cloudElement = document.getElementById('cloud');
+        const dateElement = document.getElementById('date');
+        const cityInput = document.getElementById('city-input');
+        const searchBtn = document.getElementById('search-btn');
+        const weatherIconElement = document.getElementById('weather-icon');
+        const weatherWidget = document.getElementById('weather-widget');
+
+        //Function
+        function isDay(localtime) {
+            const hour = parseInt(localtime.split(' ')[1].split(':')[0]);
+            return hour >= 6 && hour < 18;
+        }
+
+        const showWeather = async (q) => {
+            try {
+                const url = `https://api.weatherapi.com/v1/current.json?key=2ff24664643346ab83511134251005&q=${q}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                cityElement.textContent = data.location.name;
+                countryElement.textContent = data.location.country;
+                temperatureElement.textContent = data.current.temp_c;
+                conditionTextElement.textContent = `Condition: ${data.current.condition.text}`;
+                humidityElement.textContent = `Humidity: ${data.current.humidity}`;
+                cloudElement.textContent = `Cloud: ${data.current.cloud}`;
+                dateElement.textContent = data.location.localtime;
+                weatherIconElement.src = data.current.condition.icon;
+                weatherIconElement.alt = data.current.condition.text;
+                if (isDay(data.location.localtime)) {
+                    weatherWidget.style.backgroundImage = "url('../images/sun.jpg')";
+                } else {
+                    weatherWidget.style.backgroundImage = "url('../images/moon.jpg')";
+                }
+            } catch (error) {
+                alert('No se pudo obtener el clima. Intenta con otra ciudad.');
+            }
+        }
+
+        searchBtn.addEventListener('click', () => {
+            const city = cityInput.value.trim();
+            if(city) {
+                showWeather(city);
+            }
+        });
+
+        cityInput.addEventListener('keydown', (e) => {
+            if(e.key === 'Enter') {
+                searchBtn.click();
+            }
+        });
+
+        showWeather('Manizales');
+    </script>
+</body>
+</html>
