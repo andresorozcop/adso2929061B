@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O1 Write</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        main ul li {
+           color: #fffb;
+    }
+   </style>
+   <style>
+html, body {
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #0a1a2f;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#baloto-simulator {
+  width: 375px;
+  height: 667px;
+  background-image: url('../images/fondobaloto.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px #0008;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 32px auto;
+  position: relative;
+  overflow: hidden;
+}
+#ticket-container {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  justify-content: flex-start;
+  z-index: 2;
+}
+#logo-container {
+  width: 440px;
+  height: 128px;
+  background-image: url('../images/logobaloto.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#balotas-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+  margin: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(128px - 9.2em);
+  z-index: 3;
+}
+#balotas-container .balota:first-child {
+  margin-left: 1em;
+}
+#balotas-container .balota:last-child {
+  margin-right: 1em;
+}
+.balota, .superbalota {
+  width: 177px;
+  height: 177px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+  position: relative;
+  font-size: 2rem;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: bold;
+  color: #222;
+  text-shadow: none;
+  animation: none;
+  transform: scale(1);
+}
+.balota {
+  background-image: url('../images/baloto1.png');
+  width: 357px;
+  height: 357px;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: bold;
+  color: #222;
+  text-shadow: none;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.superbalota {
+  background-image: url('../images/balota2.png');
+  width: 177px;
+  height: 177px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: bold;
+  color: #222;
+  text-shadow: none;
+}
+.balota-num { display: none; }
+#superbalota-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(220px - 3.5em);
+  z-index: 3;
+}
+.superbalota-num { display: none; }
+#play-button {
+  width: 180px;
+  height: 48px;
+  background: #ffd600;
+  background-image: none;
+  color: #222;
+  font-size: 1.2rem;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  bottom: 2em;
+  transform: translateX(-50%);
+  z-index: 3;
+  box-shadow: 0 2px 8px #0002;
+  border-radius: 24px;
+  letter-spacing: 1px;
+  border: 2px solid #fff59d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#play-button:active {
+  filter: brightness(0.95);
+  transform: translateX(-50%) scale(0.97);
+}
+#play-button:disabled {
+  filter: grayscale(0.7) brightness(0.7);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+@keyframes pop-in {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.balota.visible, .superbalota.visible {
+  animation: pop-in 0.4s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+  transform: scale(1);
+}
+   </style>
+</head>
+<body class="js">
+    <nav>
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+        </a>
+    </nav>
+    <main>
+        <header>
+            <h1>01- Write</h1>
+            <p>
+                Learn to write and execute basic Javascript code
+            </p>
+        </header>
+        <section id="baloto-simulator">
+          <div id="ticket-container">
+            <!-- Logo de Baloto -->
+            <div id="logo-container"></div>
+            <!-- Balotas principales -->
+            <div id="balotas-container">
+              <div class="balota" id="balota-1"></div>
+              <div class="balota" id="balota-2"></div>
+              <div class="balota" id="balota-3"></div>
+              <div class="balota" id="balota-4"></div>
+              <div class="balota" id="balota-5"></div>
+            </div>
+            <!-- Superbalota -->
+            <div id="superbalota-container">
+              <div class="superbalota" id="superbalota"></div>
+            </div>
+            <!-- Botón para jugar -->
+            <button id="play-button" onclick="realizarSorteo()">Jugar</button>
+          </div>
+        </section>
+    </main>
+    <script>
+// Función para generar un número aleatorio entre min y max (incluidos)
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Función para generar los números de Baloto
+function balotoNumbers() {
+  var numbers = [];
+  var normalBaloto = 43;
+  var normalBalls = 5;
+  while (numbers.length < normalBalls) {
+    var numberBaloto = randomNumber(1, normalBaloto);
+    if (numbers.indexOf(numberBaloto) === -1) {
+      numbers.push(numberBaloto);
+    }
+  }
+  var goldenBallNumber = randomNumber(1, 16);
+  return {
+    normal: numbers,
+    golden: goldenBallNumber
+  };
+}
+
+function mostrarBaloto() {
+  var balotas = [
+    document.getElementById('balota-1'),
+    document.getElementById('balota-2'),
+    document.getElementById('balota-3'),
+    document.getElementById('balota-4'),
+    document.getElementById('balota-5')
+  ];
+  var superbalota = document.getElementById('superbalota');
+  var resultado = balotoNumbers();
+  for (var i = 0; i < balotas.length; i++) {
+    balotas[i].textContent = '';
+    balotas[i].classList.remove('visible');
+  }
+  superbalota.textContent = '';
+  superbalota.classList.remove('visible');
+  setTimeout(function() {
+    for (var i = 0; i < balotas.length; i++) {
+      (function(i) {
+        setTimeout(function() {
+          balotas[i].textContent = resultado.normal[i];
+          balotas[i].classList.add('visible');
+        }, 400 * i);
+      })(i);
+    }
+    setTimeout(function() {
+      superbalota.textContent = resultado.golden;
+      superbalota.classList.add('visible');
+    }, 400 * balotas.length);
+  }, 100);
+}
+
+document.getElementById('play-button').onclick = mostrarBaloto;
+    </script>
+</body>
+</html>
