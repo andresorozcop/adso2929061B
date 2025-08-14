@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Inscripción</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, textarea {
+            width: 300px;
+            padding: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        #mensaje {
+            margin-top: 15px;
+            padding: 10px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h2>Formulario de Inscripción</h2>
+    <form id="formulario">
+        <div class="form-group">
+            <label for="nombre">Nombre Completo:</label>
+            <input type="text" id="nombre" placeholder="Ingrese su nombre completo">
+        </div>
+
+        <div class="form-group">
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" placeholder="ejemplo@correo.com">
+        </div>
+
+        <div class="form-group">
+            <label for="telefono">Teléfono:</label>
+            <input type="tel" id="telefono" placeholder="Ingrese su número de teléfono">
+        </div>
+
+        <div class="form-group">
+            <label for="fecha">Fecha de Nacimiento:</label>
+            <input type="date" id="fecha">
+        </div>
+
+        <div class="form-group">
+            <label for="genero">Género:</label>
+            <select id="genero">
+                <option value="">Seleccione una opción</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="direccion">Dirección:</label>
+            <textarea id="direccion" rows="3" placeholder="Ingrese su dirección completa"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="ciudad">Ciudad:</label>
+            <input type="text" id="ciudad" placeholder="Ingrese su ciudad">
+        </div>
+
+        <div class="form-group">
+            <label for="codigo">Código Postal:</label>
+            <input type="text" id="codigo" placeholder="Ingrese su código postal">
+        </div>
+
+        <button type="submit">Enviar Inscripción</button>
+    </form>
+
+    <div id="mensaje"></div>
+
+    <script>
+        // Obtener el formulario
+        const form = document.getElementById("formulario");
+        const mensaje = document.getElementById("mensaje");
+
+        // Cuando se envia el formulario
+        form.addEventListener("submit", function(e) {
+            e.preventDefault(); // No recargar la pagina
+
+            // Obtener los valores de los campos
+            let nombre = document.getElementById("nombre").value;
+            let correo = document.getElementById("correo").value;
+            let telefono = document.getElementById("telefono").value;
+            let fecha = document.getElementById("fecha").value;
+            let genero = document.getElementById("genero").value;
+            let direccion = document.getElementById("direccion").value;
+            let ciudad = document.getElementById("ciudad").value;
+            let codigo = document.getElementById("codigo").value;
+
+            // Verificar si hay campos vacios
+            if (nombre == "" || correo == "" || telefono == "" || fecha == "" || 
+                genero == "" || direccion == "" || ciudad == "" || codigo == "") {
+                mensaje.textContent = "Por favor, complete todos los campos. Faltan datos.";
+                mensaje.className = "error";
+            } else {
+                // Verificar que el correo tenga @
+                if (correo.indexOf("@") == -1) {
+                    mensaje.textContent = "El correo debe tener @";
+                    mensaje.className = "error";
+                } else {
+                    // Todo bien
+                    mensaje.textContent = "¡Formulario exitoso! Gracias " + nombre;
+                    mensaje.className = "success";
+                    
+                    // Limpiar formulario
+                    form.reset();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
