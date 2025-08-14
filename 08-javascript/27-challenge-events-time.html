@@ -7,35 +7,40 @@
     <link rel="stylesheet" href="../css/style.css">
     <style>
         canvas {
-            background-color: #111;
+            background-color: #0a0a0a;
             border-radius: 10px;
-            box-shadow: 0 0 10px #f2ff3a;
+            box-shadow: 0 0 20px rgba(0, 150, 255, 0.3);
         }
 
         .contenedor-juego {
             position: relative;
-            width: 400px;
-            height: 500px;
+            width: 500px;
+            height: 600px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0 auto;
-            background-color: #f0f0f0;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 3px solid #fff;
         }
 
         #areaJuego {
-            width: 360px;
-            height: 460px;
-            background-color: #111;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #f2ff3a;
+            width: 450px;
+            height: 550px;
+            background: radial-gradient(circle, #ff6b6b 0%, #4ecdc4 50%, #45b7d1 100%);
+            border-radius: 15px;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
             display: none;
+            margin: 0;
+            border: 2px solid #fff;
         }
+
+
 
         #pantallaFin {
             display: none;
@@ -45,28 +50,38 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.9), rgba(78, 205, 196, 0.9));
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-radius: 10px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
         }
 
         .pantalla h2, .pantalla p {
             color: #fff;
             margin: 10px;
-            text-shadow: 0 0 5px #f2ff3a;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
         }
 
         .pantalla button {
-            padding: 10px 20px;
+            padding: 15px 30px;
             margin-top: 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: #f2ff3a;
+            border: 3px solid #fff;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: #fff;
             font-weight: bold;
             cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .pantalla button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         #lienzo {
@@ -75,23 +90,60 @@
 
         .estadisticas {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            color: white;
-            font-size: 14px;
+            top: 15px;
+            right: 15px;
+            color: #fff;
+            font-size: 18px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            padding: 10px 15px;
+            border-radius: 20px;
+            z-index: 10;
+            border: 2px solid #fff;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         
-        /* Estilo para los emojis */
-        .emoji {
+        /* Estilo para los elementos del juego */
+        .game-element {
             position: absolute;
-            font-size: 30px;
             transform: translate(-50%, -50%);
             user-select: none;
         }
         
+        .nave {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px #ff6b6b);
+        }
+        
+        .asteroide {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px #4ecdc4);
+        }
+        
         .estrella {
-            font-size: 10px;
-            color: white;
+            font-size: 15px;
+            color: #fff;
+            text-shadow: 0 0 5px #ff6b6b;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fallback svg {
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
         }
     </style>
 </head>
@@ -107,30 +159,51 @@
     
     <main>
         <header>
-            <h1>27-Challenge Events Time</h1>
-            <p>Juego espacial con eventos de tiempo y teclado</p>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px;">
+                <svg width="60" height="40" viewBox="0 0 60 40">
+                    <!-- Rocinante logo - nave espacial estilizada -->
+                    <rect x="25" y="30" width="10" height="6" fill="#666" rx="2"/>
+                    <polygon points="30,5 25,30 35,30" fill="#999"/>
+                    <rect x="27" y="25" width="6" height="4" fill="#444"/>
+                    <circle cx="30" cy="33" r="2" fill="#333"/>
+                    <rect x="20" y="27" width="3" height="5" fill="#777" rx="1"/>
+                    <rect x="37" y="27" width="3" height="5" fill="#777" rx="1"/>
+                    <rect x="28" y="32" width="4" height="1" fill="#555"/>
+                    <!-- Detalles de la Rocinante -->
+                    <rect x="26" y="20" width="8" height="2" fill="#888"/>
+                    <circle cx="30" cy="15" r="1" fill="#aaa"/>
+                </svg>
+                <h1>27 - Challenge Event Time</h1>
+            </div>
+            <p>Create time-based interactive challenges.</p>
         </header>
 
         <section>
             <div class="contenedor-juego">
                 <div id="pantallaInicio" class="pantalla">
-                    <h2>¡Bienvenido Piloto Espacial!</h2>
-                    <p>Usa las flechas ← → para moverte</p>
-                    <button id="botonInicio">Comenzar Misión</button>
+                    <img src="../images/roci.svg" alt="Rocinante" style="width: 240px; height: 180px; margin-bottom: 15px; filter: brightness(1.2);">
+                    <h2>The Expanse</h2>
+                    <p>Usa las flechas para moverte</p>
+                    <button id="botonInicio">Jugar</button>
                 </div>
 
                 <div id="areaJuego"></div>
                 <div class="estadisticas" id="puntajeDisplay"></div>
 
                 <div id="pantallaFin" class="pantalla">
-                    <h2>¡Has perdido!</h2>
+                    <h2>Game Over</h2>
                     <p id="puntajeFinal">Puntaje: 0</p>
-                    <button id="botonReiniciar">Reiniciar</button>
-                    <button id="botonVolverInicio">Volver al Inicio</button>
+                    <button id="botonReiniciar">Jugar de nuevo</button>
+                    <button id="botonVolverInicio">Inicio</button>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- Audio para la música del juego -->
+    <audio id="gameMusic" loop>
+        <source src="../images/short-game-music-loop-38898.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
         const areaJuego = document.getElementById('areaJuego');
@@ -141,6 +214,7 @@
         const botonInicio = document.getElementById('botonInicio');
         const botonReiniciar = document.getElementById('botonReiniciar');
         const botonVolverInicio = document.getElementById('botonVolverInicio');
+        const gameMusic = document.getElementById('gameMusic');
 
         const estado = {
             nave: null,
@@ -150,21 +224,111 @@
             tiempoAnterior: 0,
             puntaje: 0,
             enJuego: false,
-            tiempoDesdeUltimoAsteroide: 0
+            tiempoDesdeUltimoAsteroide: 0,
+            musicaActiva: true
         };
 
         const config = {
-            anchoJuego: 360,
-            altoJuego: 460,
-            velocidadNave: 5, 
-            frecuenciaAsteroides: 800,
-            probabilidadAsteroide: 0.02,
-            numeroEstrellas: 50
+            anchoJuego: 450,
+            altoJuego: 550,
+            velocidadNave: 6, 
+            frecuenciaAsteroides: 600,
+            probabilidadAsteroide: 0.03,
+            numeroEstrellas: 40
         };
+
+        function crearElementoImagen(src, x, y, clase = '') {
+            const elemento = document.createElement('img');
+            elemento.className = 'game-element ' + clase;
+            elemento.src = src;
+            elemento.style.left = x + 'px';
+            elemento.style.top = y + 'px';
+            elemento.onerror = function() {
+                // Si la imagen falla, crear un elemento SVG como fallback
+                this.style.display = 'none';
+                const fallbackElement = crearElementoFallback(clase, x, y);
+                this.parentNode.appendChild(fallbackElement);
+            };
+            return elemento;
+        }
+
+        function crearElementoSVG(tipo, x, y) {
+            const elemento = document.createElement('div');
+            elemento.className = 'game-element ' + tipo;
+            elemento.style.left = x + 'px';
+            elemento.style.top = y + 'px';
+            
+            if (tipo === 'nave') {
+                elemento.innerHTML = `
+                    <svg width="40" height="40" viewBox="0 0 40 40">
+                        <!-- Cuerpo principal de la nave -->
+                        <rect x="15" y="25" width="10" height="8" fill="#666" rx="2"/>
+                        <!-- Cabina -->
+                        <polygon points="20,5 15,25 25,25" fill="#999"/>
+                        <!-- Ventana -->
+                        <rect x="18" y="20" width="4" height="3" fill="#444"/>
+                        <!-- Motor -->
+                        <circle cx="20" cy="28" r="2" fill="#333"/>
+                        <!-- Alas -->
+                        <rect x="10" y="22" width="4" height="6" fill="#777" rx="1"/>
+                        <rect x="26" y="22" width="4" height="6" fill="#777" rx="1"/>
+                        <!-- Detalles -->
+                        <rect x="17" y="27" width="6" height="1" fill="#555"/>
+                    </svg>
+                `;
+            } else if (tipo === 'asteroide') {
+                elemento.innerHTML = `
+                    <svg width="30" height="30" viewBox="0 0 30 30">
+                        <!-- Cuerpo principal del asteroide -->
+                        <circle cx="15" cy="15" r="12" fill="#555"/>
+                        <!-- Cráteres -->
+                        <circle cx="12" cy="10" r="3" fill="#333"/>
+                        <circle cx="18" cy="8" r="2" fill="#444"/>
+                        <circle cx="10" cy="18" r="2" fill="#333"/>
+                        <circle cx="20" cy="20" r="1.5" fill="#444"/>
+                        <circle cx="16" cy="12" r="1" fill="#222"/>
+                        <!-- Detalles de superficie -->
+                        <path d="M8 15 Q12 13 15 15 Q18 17 22 15" stroke="#444" stroke-width="1" fill="none"/>
+                    </svg>
+                `;
+            }
+            
+            return elemento;
+        }
+
+        function crearElementoFallback(tipo, x, y) {
+            const elemento = document.createElement('div');
+            elemento.className = 'game-element fallback ' + tipo;
+            elemento.style.left = x + 'px';
+            elemento.style.top = y + 'px';
+            
+            if (tipo === 'nave') {
+                elemento.innerHTML = `
+                    <svg width="40" height="40" viewBox="0 0 40 40">
+                        <rect x="15" y="25" width="10" height="8" fill="#666" rx="2"/>
+                        <polygon points="20,5 15,25 25,25" fill="#999"/>
+                        <rect x="18" y="20" width="4" height="3" fill="#444"/>
+                        <circle cx="20" cy="28" r="2" fill="#333"/>
+                    </svg>
+                `;
+            } else if (tipo === 'asteroide') {
+                elemento.innerHTML = `
+                    <svg width="30" height="30" viewBox="0 0 30 30">
+                        <circle cx="15" cy="15" r="12" fill="#555"/>
+                        <circle cx="12" cy="10" r="3" fill="#333"/>
+                        <circle cx="18" cy="8" r="2" fill="#444"/>
+                        <circle cx="10" cy="18" r="2" fill="#333"/>
+                        <circle cx="20" cy="20" r="1.5" fill="#444"/>
+                    </svg>
+                `;
+            }
+            
+            return elemento;
+        }
 
         function crearElementoEmoji(emoji, x, y, tamaño, clase = '') {
             const elemento = document.createElement('div');
-            elemento.className = 'emoji ' + clase;
+            elemento.className = 'game-element ' + clase;
             elemento.textContent = emoji;
             elemento.style.left = x + 'px';
             elemento.style.top = y + 'px';
@@ -175,15 +339,15 @@
         function crearNave() {
             const nave = {
                 x: config.anchoJuego / 2,
-                y: config.altoJuego - 50,
-                ancho: 30,
-                alto: 30,
+                y: config.altoJuego - 120,
+                ancho: 100,
+                alto: 100,
                 velocidad: config.velocidadNave,
                 vx: 0,
                 elemento: null
             };
 
-            nave.elemento = crearElementoEmoji('🚀', nave.x, nave.y, nave.ancho);
+            nave.elemento = crearElementoImagen('../images/spaceship.png', nave.x, nave.y, 'nave');
             areaJuego.appendChild(nave.elemento);
             return nave;
         }
@@ -211,15 +375,15 @@
 
         function crearAsteroide() {
             const asteroide = {
-                x: Math.random() * (config.anchoJuego - 20),
-                y: -20,
-                ancho: 20 + Math.random() * 15,
-                alto: 20 + Math.random() * 15,
+                x: Math.random() * (config.anchoJuego - 70),
+                y: -70,
+                ancho: 70,
+                alto: 70,
                 velocidad: 2 + Math.random() * 2,
                 elemento: null
             };
             
-            asteroide.elemento = crearElementoEmoji('☄️', asteroide.x, asteroide.y, asteroide.ancho);
+            asteroide.elemento = crearElementoImagen('../images/asteroid.png', asteroide.x, asteroide.y, 'asteroide');
             areaJuego.appendChild(asteroide.elemento);
             
             return asteroide;
@@ -293,7 +457,7 @@
 
         function actualizarPuntaje(deltaTiempo) {
             estado.puntaje += deltaTiempo * 0.002;
-            puntajeDisplay.innerText = `Puntuación: ${Math.floor(estado.puntaje)}`;
+            puntajeDisplay.innerText = `Puntaje: ${Math.floor(estado.puntaje)}`;
         }
 
         function bucleJuego(timestamp) {
@@ -339,6 +503,14 @@
         function iniciarJuego() {
             inicializarJuego();
             requestAnimationFrame(bucleJuego);
+            
+            // Reproducir música del juego si está activa
+            if (estado.musicaActiva) {
+                gameMusic.volume = 0.3; // Volumen al 30%
+                gameMusic.play().catch(e => {
+                    console.log('No se pudo reproducir la música automáticamente:', e);
+                });
+            }
         }
 
         function terminarJuego() {
@@ -346,6 +518,10 @@
             areaJuego.style.display = 'none';
             pantallaFin.style.display = 'flex';
             puntajeFinal.innerText = 'Puntaje: ' + Math.floor(estado.puntaje);
+            
+            // Pausar música del juego
+            gameMusic.pause();
+            gameMusic.currentTime = 0;
         }
 
         document.addEventListener('keydown', e => {
@@ -363,6 +539,8 @@
             pantallaInicio.style.display = 'flex';
             areaJuego.style.display = 'none';
         });
+
+
     </script>
 </body>
 </html>
