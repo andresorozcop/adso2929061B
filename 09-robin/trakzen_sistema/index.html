@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Trakzen - Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .navbar {
+            background-color: white;
+            padding: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .logo {
+            display: inline-block;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            background-color: #4a90e2;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .nav-menu {
+            float: right;
+            margin-top: 5px;
+        }
+
+        .nav-item {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #666;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+        .nav-item.active {
+            background-color: black;
+            color: white;
+        }
+
+        .main-content {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .cards {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .card-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card-info {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .card-info.green {
+            color: green;
+        }
+
+        .card-info.red {
+            color: red;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 3px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span class="logo-text">Trakzen</span>
+        </div>
+        <div class="nav-menu">
+            <a href="#" class="nav-item active">Inicio</a>
+            <a href="#" class="nav-item">Registrar asistencia</a>
+            <a href="#" class="nav-item">Lista de estudiantes</a>
+            <a href="#" class="nav-item">Reportes</a>
+            <a href="#" class="nav-item">Configuración</a>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <div class="main-content">
+        <h1 class="page-title">Dashboard Principal</h1>
+        <p class="page-subtitle">Resumen general del sistema de asistencia</p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="card-title">Estudiantes Totales</div>
+                <div class="card-value">1,234</div>
+                <div class="card-info green">+12% desde el mes pasado</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Asistencia Hoy</div>
+                <div class="card-value">987</div>
+                <div class="card-info">80% de asistencia</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Promedio Semanal</div>
+                <div class="card-value">85.4%</div>
+                <div class="card-info green">+2.1% desde la semana pasada</div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Tardanzas</div>
+                <div class="card-value">23</div>
+                <div class="card-info red">-15% menos que ayer</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
