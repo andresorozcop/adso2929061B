@@ -1,0 +1,86 @@
+Tengo un juego que debo realizar como ejercicio para mis clases de programacion
+A continuacion te doy las indicaciones.
+
+
+-Challengue memory game o tambien denominado Match game
+
+-12 tarjetas 
+-6 personajes
+
+-Si salen iguales al hacer clic a dos seguidas hay match, si no salen iguales no hay match.
+
+-Tablero de juego como la imagen que te adjunte
+
+-Cuando cargue la pagina me mostrara la distribución de las fichas descubiertas o boca arriba y luego se ocultan y quedan las tarjetas boca abajo como si la tarjeta tuviera dos lados y ya uno tiene que hacer la mayor cantidad de matchs de dos iguales.
+
+-Si no son se oculta otra vez las dos fichas elegidas y asi hasta terminar.
+
+-Si si son quedan boca arriba las tarjetas
+
+-Que muestre en un apartado la cantidad de movimientos como se indica en la imagen adjunta.
+
+-Que muestre en un apartado los segundos de juego como se indica en la imagen adjunta.
+
+-Al final al quedar todas las tarjetas boca arrriba que muestre un mensaje de felicitaciones, y cuantos segundos tardo.
+
+-Un fondo como un collage un poco difuminado.
+
+-Que tenga un botón de restart abajo
+
+-Arriba el titulo
+
+-Que este hecho con HTML, CSS y JavaScript con JQuery.
+
+-Que no parezca hecho por IA
+-Que parezca hecho por un estudiante muy, muy principiante, esto incluye los comentarios y el código, y las animaciones, si hay una manera de hacerla mas compleja o con atajos pero mas avanzada mejor no hacerlo, hazlo con la manera sencilla que aprendería a hacerlo un principiante.
+-Que mi profesor de programación no sospeche que fue hecho por IA, que piense que fue hecho por mi que soy un estudiante con prácticamente nulo conocimiento en programación.
+-Quien vea el código pensara que fue hecho por alguien demasiado novato con muy poco conocimiento en programación.
+
+-El juego ira ubicado dentro de <section></section> en @12-challenge-memory-game.html
+
+
+___________
+
+| Casilla | Contenido          |
+| ------- | ------------------ |
+| 1       | logo-html.png      |
+| 2       | logo-pug.svg       |
+| 3       | logo-bootstrap.png |
+| 4       | logo-css.png       |
+| 5       | PHP-logo.svg.png   |
+| 6       | logo-js.png        |
+| 7       | logo-css.png       |
+| 8       | logo-js.png        |
+| 9       | logo-bootstrap.png |
+| 10      | PHP-logo.svg.png   |
+| 11      | logo-pug.svg       |
+| 12      | logo-html.png      |
+
+_______
+
+Mario
+
+Luigi
+
+Princess Peach
+
+Yoshi
+
+Bowser
+
+Koopa Troopa
+
+Dame una imagen de como queda la ficha al darle la vuelta que combine con lo que ya esta para utilizarla
+Solo la imagen de la ficha del tamaño de cada ficha para utilizar en el figma y poner la transicion de como si diera la vuelta
+
+
+
+
+
+  
+
+
+
+
+
+
