@@ -9,6 +9,162 @@
         main ul li {
            color: #fffb;
     }
+        
+        /* Estilos para el juego de memoria */
+        section {
+            background-image: url('images/logos_memory_game/fondo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 600px;
+            height: 700px; /* Reducida la altura total */
+            padding: 0; /* Eliminado el padding */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Alineado al inicio */
+            margin: 0 auto;
+            box-sizing: border-box;
+            overflow: hidden; /* Evita desbordamientos */
+        }
+        
+        .game-title {
+            text-align: center;
+            margin: 5px 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .game-title img {
+            width: 176px;
+            height: 129px;
+        }
+        
+        .counters {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 10;
+        }
+        
+        .counter {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 8px 15px;
+            border-radius: 12px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+            border: 2px solid #ff6b6b;
+        }
+        
+        .counter-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-right: 5px;
+        }
+        
+        .counter-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 4px;
+            max-width: 400px;
+            margin: 2px auto; /* Reducido el margen */
+            padding: 2px; /* Reducido el padding */
+            z-index: 10;
+            align-items: center;
+        }
+        
+        .card {
+            width: 100px;
+            height: 100px;
+            background-image: url('images/logos_memory_game/tarjeta.png');
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        }
+        
+        .card:hover {
+            transform: scale(1.05);
+        }
+        
+        .card.flipped {
+            background-image: none;
+            background-color: transparent;
+        }
+        
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .restart-button {
+            text-align: center;
+            z-index: 10;
+            margin: -15px 0; /* Margen negativo para acercar más */
+            padding: 0;
+            line-height: 0; /* Elimina espacio extra debajo de la imagen */
+        }
+        
+        .restart-button img {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            width: 150px;
+            height: 150px;
+            margin: 0;
+            padding: 0;
+            display: block;
+            transform: scale(1.0);
+        }
+        
+        .restart-button img:hover {
+            transform: scale(1.05);
+        }
+        
+        .congratulations {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            z-index: 1000;
+            border: 3px solid #ff6b6b;
+        }
+        
+        .congratulations h2 {
+            color: #ff6b6b;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .congratulations p {
+            color: #333;
+            font-size: 1.1em;
+        }
+        
+        /* Animación simple para voltear tarjetas */
+        .card.flipping {
+            transform: rotateY(180deg);
+        }
    </style>
 </head>
 <body class="jquery">
@@ -19,21 +175,215 @@
     </nav>
     <main>
         <header>
-            <h1>12-challenge-memory-game</h1>
+            <h1>12-Challenge Memory Game</h1>
             <p>
                 Build a memory game using jQuery.
             </p>
         </header>
         <section>
+            <!-- Título del juego con contadores -->
+            <div class="game-title">
+                <div class="counters">
+                    <div class="counter">
+                        <span class="counter-label">Movimientos:</span>
+                        <span class="counter-value" id="movimientos">0</span>
+                    </div>
+                    <div class="counter">
+                        <span class="counter-label">Tiempo:</span>
+                        <span class="counter-value" id="segundos">0s</span>
+                    </div>
+                </div>
+                <img src="images/logos_memory_game/titulo.png" alt="Super Mario Memory Game">
+                <div class="counters">
+                    <!-- Espacio vacío para balancear el diseño -->
+                </div>
+            </div>
             
+            <!-- Tablero del juego -->
+            <div class="game-board" id="gameBoard">
+                <!-- Las tarjetas se generarán con JavaScript -->
+            </div>
+            
+            <!-- Botón de reiniciar -->
+            <div class="restart-button">
+                <img src="images/logos_memory_game/reiniciar_button.png" alt="Reiniciar" id="restartBtn">
+            </div>
+            
+            <!-- Mensaje de felicitaciones -->
+            <div class="congratulations" id="congratulations" style="display: none;">
+                <h2>¡Felicitaciones!</h2>
+                <p>Completaste el juego en <span id="finalTime"></span> segundos</p>
+            </div>
         </section>
     </main>
     <script src="js/jquery-3.7.1.min.js"></script>
        <script> 
-    $(document).ready(function(){})
-
-            $(function(){
-
+    $(document).ready(function(){
+        
+        // Variables del juego
+        var movimientos = 0;
+        var segundos = 0;
+        var tarjetasVolteadas = [];
+        var tarjetasEncontradas = 0;
+        var juegoIniciado = false;
+        var timer;
+        
+        // Array con los personajes (6 personajes, cada uno aparece 2 veces)
+        var personajes = [
+            'mario.png',
+            'luigi.png', 
+            'peach.png',
+            'bowser.png',
+            'koopa.png',
+            'yoshi.png',
+            'mario.png',
+            'luigi.png',
+            'peach.png', 
+            'bowser.png',
+            'koopa.png',
+            'yoshi.png'
+        ];
+        
+        // Función para mezclar el array
+        function mezclarArray(array) {
+            var arrayMezclado = array.slice();
+            for (var i = arrayMezclado.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = arrayMezclado[i];
+                arrayMezclado[i] = arrayMezclado[j];
+                arrayMezclado[j] = temp;
+            }
+            return arrayMezclado;
+        }
+        
+        // Función para crear las tarjetas
+        function crearTarjetas() {
+            var personajesMezclados = mezclarArray(personajes);
+            var html = '';
+            
+            for (var i = 0; i < 12; i++) {
+                html += '<div class="card" data-personaje="' + personajesMezclados[i] + '" data-indice="' + i + '"></div>';
+            }
+            
+            $('#gameBoard').html(html);
+        }
+        
+        // Función para mostrar todas las tarjetas al inicio
+        function mostrarTarjetasInicial() {
+            $('.card').each(function() {
+                var personaje = $(this).data('personaje');
+                $(this).html('<img src="images/logos_memory_game/' + personaje + '" alt="' + personaje + '">');
+            });
+        }
+        
+        // Función para ocultar todas las tarjetas
+        function ocultarTarjetas() {
+            $('.card').html('');
+        }
+        
+        // Función para iniciar el juego
+        function iniciarJuego() {
+            crearTarjetas();
+            mostrarTarjetasInicial();
+            
+            // Después de 3 segundos, ocultar las tarjetas
+            setTimeout(function() {
+                ocultarTarjetas();
+                juegoIniciado = true;
+                iniciarTimer();
+            }, 3000);
+        }
+        
+        // Función para iniciar el timer
+        function iniciarTimer() {
+            timer = setInterval(function() {
+                segundos++;
+                $('#segundos').text(segundos + 's');
+            }, 1000);
+        }
+        
+        // Función para detener el timer
+        function detenerTimer() {
+            clearInterval(timer);
+        }
+        
+        // Función para reiniciar el juego
+        function reiniciarJuego() {
+            movimientos = 0;
+            segundos = 0;
+            tarjetasVolteadas = [];
+            tarjetasEncontradas = 0;
+            juegoIniciado = false;
+            
+            $('#movimientos').text('0');
+            $('#segundos').text('0s');
+            $('#congratulations').hide();
+            
+            detenerTimer();
+            iniciarJuego();
+        }
+        
+        // Función para verificar si el juego terminó
+        function verificarJuegoTerminado() {
+            if (tarjetasEncontradas === 12) {
+                detenerTimer();
+                $('#finalTime').text(segundos);
+                $('#congratulations').show();
+            }
+        }
+        
+        // Evento click en las tarjetas
+        $(document).on('click', '.card', function() {
+            if (!juegoIniciado) return;
+            if ($(this).hasClass('flipped')) return;
+            if (tarjetasVolteadas.length >= 2) return;
+            
+            var personaje = $(this).data('personaje');
+            var indice = $(this).data('indice');
+            
+            // Mostrar la tarjeta
+            $(this).html('<img src="images/logos_memory_game/' + personaje + '" alt="' + personaje + '">');
+            $(this).addClass('flipped');
+            
+            tarjetasVolteadas.push({
+                elemento: $(this),
+                personaje: personaje,
+                indice: indice
+            });
+            
+            // Si se han volteado 2 tarjetas
+            if (tarjetasVolteadas.length === 2) {
+                movimientos++;
+                $('#movimientos').text(movimientos);
+                
+                // Verificar si son iguales
+                if (tarjetasVolteadas[0].personaje === tarjetasVolteadas[1].personaje) {
+                    // Son iguales - mantenerlas volteadas
+                    tarjetasEncontradas += 2;
+                    tarjetasVolteadas = [];
+                    
+                    // Verificar si el juego terminó
+                    verificarJuegoTerminado();
+                } else {
+                    // No son iguales - voltearlas de nuevo después de 1 segundo
+                    setTimeout(function() {
+                        tarjetasVolteadas[0].elemento.html('');
+                        tarjetasVolteadas[1].elemento.html('');
+                        tarjetasVolteadas[0].elemento.removeClass('flipped');
+                        tarjetasVolteadas[1].elemento.removeClass('flipped');
+                        tarjetasVolteadas = [];
+                    }, 1000);
+                }
+            }
+        });
+        
+        // Evento click en el botón de reiniciar
+        $('#restartBtn').click(function() {
+            reiniciarJuego();
+        });
+        
+        // Iniciar el juego cuando se carga la página
+        iniciarJuego();
                 
             })
     </script>
