@@ -10,23 +10,23 @@
            color: #fffb;
     }
         
-        /* Estilos para el juego de memoria */
-        section {
+        /* estilos del juego (basico) */
+        .game-section {
             background-image: url('images/logos_memory_game/fondo.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             width: 600px;
-            height: 700px; /* Reducida la altura total */
-            padding: 0; /* Eliminado el padding */
+            height: 700px;
+            padding: 0;
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Alineado al inicio */
+            justify-content: flex-start;
             margin: 0 auto;
             box-sizing: border-box;
-            overflow: hidden; /* Evita desbordamientos */
+            overflow: hidden;
         }
         
         .game-title {
@@ -52,11 +52,10 @@
         }
         
         .counter {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: #fff;
             padding: 8px 15px;
-            border-radius: 12px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-            border: 2px solid #ff6b6b;
+            border-radius: 8px;
+            border: 1px solid #ddd;
         }
         
         .counter-label {
@@ -78,8 +77,8 @@
             grid-template-rows: repeat(4, 1fr);
             gap: 4px;
             max-width: 400px;
-            margin: 2px auto; /* Reducido el margen */
-            padding: 2px; /* Reducido el padding */
+            margin: 2px auto;
+            padding: 2px;
             z-index: 10;
             align-items: center;
         }
@@ -92,13 +91,7 @@
             background-position: center;
             cursor: pointer;
             border-radius: 8px;
-            transition: transform 0.2s ease;
             position: relative;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-        }
-        
-        .card:hover {
-            transform: scale(1.05);
         }
         
         .card.flipped {
@@ -116,24 +109,18 @@
         .restart-button {
             text-align: center;
             z-index: 10;
-            margin: -15px 0; /* Margen negativo para acercar más */
+            margin: -15px 0;
             padding: 0;
-            line-height: 0; /* Elimina espacio extra debajo de la imagen */
+            line-height: 0;
         }
         
         .restart-button img {
             cursor: pointer;
-            transition: transform 0.2s ease;
             width: 150px;
             height: 150px;
             margin: 0;
             padding: 0;
             display: block;
-            transform: scale(1.0);
-        }
-        
-        .restart-button img:hover {
-            transform: scale(1.05);
         }
         
         .congratulations {
@@ -141,13 +128,12 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: #fff;
             padding: 30px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
             z-index: 1000;
-            border: 3px solid #ff6b6b;
+            border: 2px solid #ff6b6b;
         }
         
         .congratulations h2 {
@@ -161,10 +147,9 @@
             font-size: 1.1em;
         }
         
-        /* Animación simple para voltear tarjetas */
-        .card.flipping {
-            transform: rotateY(180deg);
-        }
+        /* sin animaciones avanzadas */
+
+        /* (sin estilos adicionales para Figma) */
    </style>
 </head>
 <body class="jquery">
@@ -180,7 +165,7 @@
                 Build a memory game using jQuery.
             </p>
         </header>
-        <section>
+        <section class="game-section">
             <!-- Título del juego con contadores -->
             <div class="game-title">
                 <div class="counters">
@@ -215,6 +200,15 @@
                 <p>Completaste el juego en <span id="finalTime"></span> segundos</p>
             </div>
         </section>
+        <!-- Figma -->
+        <iframe
+          src="https://www.figma.com/embed?embed_host=astra&url=https%3A%2F%2Fwww.figma.com%2Fdesign%2FUeeyrkCsTgY7xo6MQxj9Jj%2FUntitled%3Ft%3Dz21qchOSWd7cbQLP-1"
+          width="100%"
+          height="450"
+          style="border:0;"
+          loading="lazy"
+          allowfullscreen>
+        </iframe>
     </main>
     <script src="js/jquery-3.7.1.min.js"></script>
        <script> 
@@ -273,12 +267,16 @@
             $('.card').each(function() {
                 var personaje = $(this).data('personaje');
                 $(this).html('<img src="images/logos_memory_game/' + personaje + '" alt="' + personaje + '">');
+                // Evitar mostrar el dorso (tarjeta.png) durante la previsualización
+                $(this).addClass('flipped');
             });
         }
         
         // Función para ocultar todas las tarjetas
         function ocultarTarjetas() {
+            // Al ocultar, vaciar y volver a mostrar el dorso removiendo 'flipped'
             $('.card').html('');
+            $('.card').removeClass('flipped');
         }
         
         // Función para iniciar el juego
