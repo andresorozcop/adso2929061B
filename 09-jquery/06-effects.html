@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>00-template</title>
+    <title>06-effects</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
     section.section {
@@ -32,9 +32,9 @@
     </nav>
     <main>
         <header>
-            <h1>00-template</h1>
+            <h1>06-effects</h1>
             <p>
-                
+                Add animations and effects to elements.
             </p>
         </header>
         <section class="section">
@@ -58,62 +58,52 @@
     </main>
     <script src="js/jquery-3.7.1.min.js"></script>
        <script> 
-    $(document).ready(function(){})
-        Event Change
-            $('f.x')(function(){
-
-
+    $(document).ready(function(){
+        $('.fx').on('change', function(){
+            const v = $(this).val();
+            const $c = $('.character');
+            switch(v){
                 case '1':
-                    $('character').hide()
-                    toggleDisableds()
+                    $c.hide();
                     break;
                 case '2':
-                    $('character').show()
-                    toggleDisableds()
+                    $c.show();
                     break;
                 case '3':
-                    $('character').toggle()
-                    toggleDisableds()
+                    $c.toggle();
                     break;
                 case '4':
-                    $('character').slideDown(2500)
-                    toggleDisableds()
+                    $c.slideDown(500);
                     break;
                 case '5':
-                    $('character').slideUp(2500)
-                    toggleDisableds()
+                    $c.slideUp(500);
                     break;
                 case '6':
-                    $('character').slideToggle(2500)
-                    toggleDisableds()
+                    $c.slideToggle(500);
                     break;
                 case '7':
-                    $('character').fadeIn(2500)
-                    toggleDisableds()
+                    $c.fadeIn(500);
                     break;
-                 case '8':
-                    $('character').fadeOut(2500)
-                    toggleDisableds() 
-                    break;                
+                case '8':
+                    $c.fadeOut(500);
+                    break;
                 case '9':
-                    $('character').fadeTo(2500, 0.3)
-                    toggleDisableds()
-                    break;  
+                    $c.fadeTo(500, 0.3);
+                    break;
                 case '10':
-                    $('character').fadeToggle(2500)
-                    toggleDisableds()
-                    break;   
+                    $c.fadeToggle(500);
+                    break;
                 case '11':
-                    $('character').animate({ width: '120px'}, 2500)
-                                    .animate({ width: '260px'}, 2500)
-                    
-                    break; 
+                    $c.stop(true, true)
+                      .animate({ width: '120px' }, 500)
+                      .animate({ width: '260px' }, 500);
+                    break;
                 case '12':
-                    $('.character').stop()
-                    
-                    break; 
-                
-            })
+                    $c.stop(true);
+                    break;
+            }
+        });
+    })
     </script>
 </body>
 </html>
