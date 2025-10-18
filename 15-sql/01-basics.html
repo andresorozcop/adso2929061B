@@ -1,0 +1,36 @@
+// Connect to MySQL
+
+> mysql -u root -p
+
+//MySQL Version
+
+>mysql --version
+
+// Show All Databases;
+
+//Create tables gyms 
+
+create table gyms (
+    id int auto_increment,
+    name varchar(32) not null unique,
+    PRIMARY KEY(id)
+    );
+
+
+//Create table trainers 
+
+create table trainers (
+    -> id int auto_increment,
+    -> name varchar(32) not null unique,
+    -> level int not null,
+    -> gym_id int,
+    -> PRIMARY KEY(id),
+    -> FOREIGN KEY(gym_id) REFERENCES gyms(id));
+
+
+//Create table 
+
+
+// Create Backup Database
+mysqldump -u root pokeadso > /Users   
+
