@@ -5,7 +5,14 @@
 
     include 'template/header.php';
 
-    
+    abstract class Database {
+        protected $host = 'localhost:';
+        protected $user = 'root:';
+        protected $pass = '';
+        protected $dbname = 'pokeadso';
+        protected $connection;
+
+    }
 
 
     include 'template/footer.php';
