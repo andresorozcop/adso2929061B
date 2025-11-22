@@ -63,7 +63,7 @@
     $ash = new Trainer("Ash");
 
     // salida simple en html (la plantilla ya abre <section>)
-    echo "<h2 style='margin-top:10px'>Demo Cohesion y Acoplamiento (Pokemon)</h2>";
+    echo "<h2 style='margin-top:10px'>Cohesion y Acoplamiento (Pokemon)</h2>";
     // conceptos basicos para mostrar al profe
     echo "<h3>Conceptos</h3>";
     echo "<p><b>Clases:</b> Pokemon, Trainer</p>";
