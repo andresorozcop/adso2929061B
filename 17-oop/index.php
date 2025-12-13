@@ -6,6 +6,7 @@
     <title>17 OOP</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+<<<<<<< HEAD
 <body class="php">
     
     <main>
@@ -17,6 +18,23 @@
             </p>
         </header>
         <menu>
+=======
+<body class="oop">
+    
+    <main>
+        <header>
+            <h1>OOP</h1>
+            <img src="images/logo-oop.png" alt="PHP">
+            <p>
+                Oriented object programming
+            </p>
+        </header>
+        <menu>
+            <a href="00-cohesion_coupling.php">
+                <span>00</span>
+                High cohesion low coupling
+            </a>
+>>>>>>> d047073ce989516ca9fff1ccbe602791a6a55b26
             <a href="01-class.php">
                 <span>01</span>
                 Class
