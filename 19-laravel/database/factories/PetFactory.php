@@ -27,3 +27,45 @@ class PetFactory extends Factory
         ];
     }
 }
+ //Relationship:
+ // Pet has one Adoption
+
+ public function adoption() {
+
+    return $this->hasOne(Adoption::class);
+ }
+
+
+ > $user->document = 666
+ = 666
+
+ > $user
+ = App/Models/User {#5388
+    document: 666,
+ }
+
+ > $user->fullname = 'Demonoid'
+ = "Demonoid"
+
+ > $user->gender = 'Male'
+ = "Male"
+
+ > $user->birthdate = '1996-06-06'
+    = "1996-06-06"  
+
+> $user->phone = '3666666666'
+= "3666666666"
+
+> $user->email = 'demon666@gmail.com'
+= "demon666@gmail.com"
+
+> $user->password = bcrypt('123')
+=""
+
+> User::find(53)
+= null
+
+> $user->adoptions
+= 
+
+> $adop = Adoption:: find(1)

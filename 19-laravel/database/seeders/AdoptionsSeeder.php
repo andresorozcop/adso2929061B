@@ -16,17 +16,17 @@ class AdoptionsSeeder extends Seeder
     {
         $adopt = new Adoption;
         $adopt->user_id = 2;
-        $adopt->pet_id = 7;
+        $adopt->pet_id = 1;
         if($adopt->save()){
-            $pet = Pet::find(7);
+            $pet = Pet::find(1);
             $pet->adopted = 1;
             $pet->save();
         }
         $adopt = new Adoption;
         $adopt->user_id = 2;
-        $adopt->pet_id = 9;
+        $adopt->pet_id = 2;
         if($adopt->save()){
-            $pet = Pet::find(9);
+            $pet = Pet::find(2);
             $pet->adopted = 1;
             $pet->save();
         }
