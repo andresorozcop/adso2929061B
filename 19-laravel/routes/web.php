@@ -20,7 +20,7 @@ Route::get('getall/pets', function() {
 
 Route::get('show/pet/{id}', function() {
     $pet = App\Models\Pet::find(request()->id);
-    dd($pet->toArray());
+    return view('showpet', compact('pet'));
 });
 
 Route::get('/users', [UserController::class, 'showUsers']);

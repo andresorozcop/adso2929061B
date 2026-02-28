@@ -21,7 +21,7 @@ class Pet extends Model
         'age',
         'breed',
         'location',
-        'descrpition',
+        'description',
         'active',
         'adopted',
     ];
