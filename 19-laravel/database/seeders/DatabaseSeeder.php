@@ -6,6 +6,10 @@ use App\Models\User;
 use App\Models\Pet;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,19 +20,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // creo 50 usuarios uno por uno, cada uno con una foto diferente
-        for ($i = 1; $i <= 50; $i++) {
-            $photoName = 'user' . $i . '.png';
-
-            \App\Models\User::factory()->create([
-                'photo' => $photoName,
-            ]);
-        }
-
+        // Seeders
         $this->call([
-             //UserSeeder::class,
-             PetsSeeder::class,
-             AdoptionsSeeder::class,
+            UserSeeder::class,
+            PetSeeder::class,
+            AdoptionSeeder::class
+
         ]);
+        // Factory
+        User::factory(50)->create();
+        Pet::factory(50)->create();
+
     }
 }

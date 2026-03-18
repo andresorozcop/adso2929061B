@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pet extends Model
 {
+
     use HasFactory;
-    /**
-     * The attributes that
-     * 
-     * 
+        /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -23,6 +24,13 @@ class Pet extends Model
         'location',
         'description',
         'active',
-        'adopted',
+        'adopted'
     ];
+
+    //RelationShip:
+    //Pet has one Adoptions 
+    public function adoptions() {
+        return $this->hasOne(Adoption::class);
+    }
+
 }

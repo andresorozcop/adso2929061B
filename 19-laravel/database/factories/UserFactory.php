@@ -23,45 +23,37 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        // genero el genero del usuario, puede ser Male o Female
-        $gender = fake()->randomElement(['Male', 'Female']);
-
-        // dependiendo del genero, escojo un nombre masculino o femenino
-        if ($gender == 'Male') {
-            $firstName = fake()->firstNameMale();
-        } else {
-            $firstName = fake()->firstNameFemale();
-        }
-
-        // genero el apellido y el nombre completo
-        $lastName = fake()->lastName();
-        $fullName = $firstName . ' ' . $lastName;
-
-        // fecha de nacimiento entre 1974 y 2004
-        $birthdate = fake()->dateTimeBetween('1974-01-01', '2004-12-31')->format('Y-m-d');
-
-        // escojo una foto segun el genero del usuario usando user1.jpg a user50.jpg
-        if ($gender == 'Male') {
-            // para hombres uso fotos user1.jpg hasta user25.jpg
-            $photoNumber = fake()->numberBetween(1, 25);
-        } else {
-            // para mujeres uso fotos user26.jpg hasta user50.jpg
-            $photoNumber = fake()->numberBetween(26, 50);
-        }
-
-        $photo = 'user' . $photoNumber . '.jpg';
+        // return [
+        //     'document' => fake()->numerify('75#######'),
+        //     'fullname' => fake()->firstname().' '.fake()->lastName(),
+        //     'gender'=> fake()->randomElement(['Female', 'Male']),
+        //     'birthdate' => fake()->date(),
+        //     'phone' => fake()->numerify('320#######'),
+        //     'email' => fake()->unique()->safeEmail(),
+        //     'email_verified_at' => now(),
+        //     'password' => bcrypt('123456'),
+        //     'remember_token' => Str::random(10),
+        // ];
+        $gender = fake()->randomElement(array('Female', 'Male'));
+        $name = ($gender == 'Female') ? $name = fake()->firstNameFemale()
+                                      : $name = fake()->firstNameMale();
+        ($gender == 'Female') ? $g = 'women' : $g = 'men';
+        $id = fake()->numerify('75######');
+        $tnd = fake()->numberBetween(1,99);
+        copy('https://randomuser.me/api/portraits/' . $g . '/' . $tnd . '.jpg', public_path('images/' . $id . '.png'));
+        $email = Str::slug(strtolower($name)).fake()->numerify('###'. '@mail.com');
 
         return [
-            'document'          => fake()->numerify('75######'),
-            'fullname'          => $fullName,
-            'gender'            => $gender,
-            'birthdate'         => $birthdate,
-            'phone'             => fake()->numerify('320########'),
-            'email'             => fake()->unique()->safeEmail(),
+            'document'=> $id,
+            'fullname'=> $name . " " . fake()->lastName(),
+            'gender'=> $gender,
+            'birthdate' => fake()->dateTimeBetween('1976-01-01','2006-12-31'),
+            'photo' => $id . '.png',
+            'email' => $email,
+            'phone' => fake()->numerify('310#######'),
             'email_verified_at' => now(),
-            'password'          => bcrypt('12345'),
-            'remember_token'    => Str::random(10),
-            'photo'             => $photo,
+            'password' => static::$password ??= Hash::make('12345'),
+            'remember_token' => Str::random(10),
         ];
     }
 

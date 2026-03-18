@@ -20,13 +20,13 @@ return new class extends Migration
             $table->string('photo')->default('no-photo.png');
             $table->string('phone');
             $table->string('email')->unique();
-            $table->string('email_verified_at')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('active')->default('1');
+            $table->boolean('active')->default(1);
             $table->string('role')->default('Customer');
             $table->rememberToken();
             $table->timestamps();
-        }); 
+        });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
