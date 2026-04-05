@@ -6,6 +6,19 @@
     <title>17 OOP</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+<<<<<<< HEAD
+<body class="php">
+    
+    <main>
+        <header>
+            <h1>PHP</h1>
+            <img src="images/logo-oop.png" alt="PHP">
+            <p>
+                Language that execute server side
+            </p>
+        </header>
+        <menu>
+=======
 <body class="oop">
     
     <main>
@@ -21,6 +34,7 @@
                 <span>00</span>
                 High cohesion low coupling
             </a>
+>>>>>>> d047073ce989516ca9fff1ccbe602791a6a55b26
             <a href="01-class.php">
                 <span>01</span>
                 Class
