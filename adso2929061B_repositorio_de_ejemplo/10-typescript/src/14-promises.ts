@@ -1,0 +1,24 @@
+// 14 - Promises: manejo básico con then/catch
+
+function loadUser(): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const success = Math.random() > 0.5;
+        setTimeout(() => {
+            success ? resolve("User loaded!") : reject("Error loading user");
+        }, 1500);
+    });
+}
+
+loadUser()
+    .then(response => {
+        const output14 = document.getElementById('output14');
+        if (output14) {
+            output14.innerHTML = `<li>${response}</li>`;
+        }
+    })
+    .catch(error => {
+        const output14 = document.getElementById('output14');
+        if (output14) {
+            output14.innerHTML = `<li style="color:red;">${error}</li>`;
+        }
+    });

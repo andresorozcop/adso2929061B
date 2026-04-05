@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>07 - Class Vehicle</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+<style>
+    figure.vehicle {
+    background: url(images/vehicle/bglight.svg) no-repeat center;
+    border-radius: 40px;
+    padding: 0;
+    position: relative;
+    margin: 0;
+    transition: all 0.4s ease-in;
+    height: 680px;
+    width: 368px;
+}
+
+figure.vehicle button.btn-mode {
+    background: url(images/vehicle/btn-mode-light.svg) no-repeat;
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    transition: all 0.4s ease-in;
+    height: 40px;
+}
+
+figure.vehicle h4 {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    color: #f7f7f7;
+    font-weight: 600;
+    font-size: 16px;
+    position: absolute;
+}
+
+figure.vehicle h4.title-brand {
+    color: #1e1e1e;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 97px;
+}
+
+figure.vehicle h4.title-model {
+    top: 220px;
+    left: 14px;
+    width: 110px;
+}
+
+figure.vehicle h4.title-refer {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 220px;
+    width: 110px;
+}
+
+figure.vehicle h4.title-color {
+    top: 220px;
+    left: 254px;
+    width: 90px;
+}
+
+div.landscape {
+    top: 301px;
+    left: 9px;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    height: 270px;
+    width: 350px;
+    transition: transform 0.4s ease-in;
+}
+
+div.landscape div {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+}
+
+div.landscape div.layer01 div.bg1 {
+    background: url(images/vehicle/forest.svg) repeat-x 0 bottom;
+    background-size: auto 100%;
+    height: 100%;
+    width: 200%;
+    z-index: 3; 
+}
+
+div.landscape div.layer02 div.bg2 {
+    background: url(images/vehicle/mountains.svg) repeat-x 0 bottom;
+    background-size: auto 100%;
+    height: 100%;
+    width: 200%;
+    z-index: 2; 
+}
+
+div.landscape div.layer03 div.bg3 {
+    background: url(images/vehicle/sky.svg) repeat-x 0 bottom;
+    background-size: auto 100%;
+    height: 100%;
+    width: 200%;
+    z-index: 1; 
+}
+
+img.car {
+    position: absolute; 
+    left:  35%; 
+    transform: translateX(-60%); 
+    bottom: 90px; 
+    height: 75px;
+    width: 150px;
+    z-index: 4; 
+}
+
+figure.vehicle button.btn-prev,
+figure.vehicle button.btn-next {
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    height: 40px;
+    top: 118px;
+    width: 40px;
+    transition: transform 0.4s ease-in;
+}
+
+figure.vehicle button.btn-prev {
+    background: url(images/vehicle/btn-prev.svg) no-repeat center;
+    left: 15px;
+}
+
+figure.vehicle button.btn-prev:hover {
+    transform: scale(1.1) translateX(-5px);
+}
+
+figure.vehicle button.btn-next {
+    background: url(images/vehicle/btn-next.svg) no-repeat center;
+    right: 15px;
+}
+
+figure.vehicle button.btn-next:hover {
+    transform: scale(1.1) translateX(5px);
+}
+div.methods {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 12px;
+    gap: 0.2rem;
+    width: 346px;
+    bottom: 20px;
+    &:hover button:not(:hover){
+        opacity: 0.2;
+    }
+
+    button {
+        border: none;
+        cursor: pointer;
+        height: 65px;
+        transition: all 0.4s ease-in;
+        width: 60px;
+        &:hover {
+            transform: scale(1.05);
+        }
+        &.btn-power-on {
+            background: url(images/vehicle/btn-on.svg);
+        }
+        &.btn-forward {
+            background: url(images/vehicle/btn-forward.svg);
+        }
+        &.btn-stop {
+            background: url(images/vehicle/btn-stop.svg);
+        }
+        &.btn-backward {
+            background: url(images/vehicle/btn-back.svg);
+        }
+        &.btn-power-off {
+            background: url(images/vehicle/btn-off.svg);
+        }
+    }
+}
+
+
+/* DARK MODE */
+figure.vehicle.dark {
+    background: url(images/vehicle/bgdark.svg) no-repeat center;
+}
+
+figure.vehicle.dark button.btn-mode {
+    background: url(images/vehicle/btn-mode-light.svg) no-repeat;
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    transition: all 0.4s ease-in;
+    height: 40px;
+}
+
+figure.vehicle.dark button.btn-mode {
+    background: url(images/vehicle/btn-mode-dark.svg) no-repeat;
+}
+
+figure.vehicle.dark h4 {
+    color: #1e1e1e;
+}
+
+figure.vehicle.dark h4.title-brand {
+    color: #f7f7f7;
+}
+figure.vehicle.dark button.btn-prev,
+figure.vehicle.dark button.btn-next {
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    height: 40px;
+    top: 118px;
+    width: 40px;
+    transition: transform 0.4s ease-in;
+}
+
+figure.vehicle.dark button.btn-prev {
+    background: url(images/vehicle/btn-prev-dark.svg) no-repeat center;
+    left: 15px;
+}
+
+figure.vehicle.dark button.btn-prev:hover {
+    transform: scale(1.1) translateX(-5px);
+}
+
+figure.vehicle.dark button.btn-next {
+    background: url(images/vehicle/btn-next-dark.svg) no-repeat center;
+    right: 15px;
+}
+
+figure.vehicle.dark button.btn-next:hover {
+    transform: scale(1.1) translateX(5px);
+}
+
+
+figure.vehicle.dark div.landscape div.layer01 div.bg1 {
+    background: url(images/vehicle/forest-dark.svg) repeat-x 0 bottom;
+    background-size: auto 100%;
+    height: 100%;
+    width: 200%;
+    z-index: 3; 
+}
+
+figure.vehicle.dark div.landscape div.layer02 div.bg2 {
+    background: url(images/vehicle/mountains-dark.svg) repeat-x 0 bottom;
+    background-size: auto 100%;
+    height: 100%;
+    width: 200%;
+    z-index: 2; 
+}
+
+figure.vehicle.dark div.landscape div.layer03 div.bg3 {
+    background: url(images/vehicle/sky-dark.svg) repeat-x 0 bottom;
+    background-size: auto 100%;
+    height: 100%;
+    width: 200%;
+    z-index: 1; 
+}
+
+.show-data {
+    animation: showData 1s ease-in forwards;
+}
+
+figure.vehicle.dark button {
+        border: none;
+        cursor: pointer;
+        height: 65px;
+        transition: all 0.4s ease-in;
+        width: 60px;
+        &:hover {
+            transform: scale(1.05);
+        }
+        &.btn-power-on {
+            background: url(images/vehicle/btn-on-dark.svg);
+        }
+        &.btn-forward {
+            background: url(images/vehicle/btn-forward-dark.svg);
+        }
+        &.btn-stop {
+            background: url(images/vehicle/btn-stop-dark.svg);
+        }
+        &.btn-backward {
+            background: url(images/vehicle/btn-back-dark.svg);
+        }
+        &.btn-power-off {
+            background: url(images/vehicle/btn-off-dark.svg);
+        }
+    }
+
+@keyframes showData {
+    0% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+</style>
+</head>
+<body class="javascript">
+    <nav>
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+        </a>
+    </nav>
+    <main>
+        <header>
+            <h1>07 - Class Vehicle</h1>
+            <p>
+                Create and manipulate a vehicle object with properties.
+            </p>
+        </header>
+        <section>
+            <figure class="vehicle">
+                <button class="btn-mode"></button>
+                <h4 class="title-brand"></h4>
+                <h4 class="title-model"></h4>
+                <h4 class="title-refer"></h4>
+                <h4 class="title-color"></h4>
+                <button class="btn-prev"></button>
+                <button class="btn-next"></button>
+                
+                <div class="landscape">
+                    <div class="layer01">
+                        <div class="layer bg1"></div>
+                    </div>
+                    <div class="layer02">
+                        <div class="layer bg2"></div>
+                    </div>
+                    <div class="layer03">
+                        <div class="layer bg3"></div>
+                        <img class="car" src="">
+                    </div>
+                </div>
+
+                <div class="methods">
+                    <button class="btn-power-on"></button>
+                    <button class="btn-forward"></button>
+                    <button class="btn-stop"></button>
+                    <button class="btn-backward"></button>
+                    <button class="btn-power-off"></button>
+                </div>
+            </figure>
+        </section>
+    </main>
+    <script>
+        // Object
+        const vehicles = {
+    Attrs: [
+        { brand: 'Apollo 21',  refer: 'NASA',   model: '2024', color: 'Gray', image: 'images/vehicle/nave1.png' },
+        { brand: 'Voyager Jr', refer: 'SpaceX', model: '2032', color: 'Orange',  image: 'images/vehicle/nave2.png' },
+        { brand: 'Mazda',      refer: 'SpaceY', model: '2028', color: 'White', image: 'images/vehicle/nave3.png' },
+    ]
+};
+
+        // Elements
+        const tBrand = document.querySelector('.title-brand');
+        const tRefer = document.querySelector('.title-refer');
+        const tModel = document.querySelector('.title-model');
+        const tColor = document.querySelector('.title-color');
+        const layer1 = document.querySelector('.landscape .layer01 .bg1'); 
+        const layer2 = document.querySelector('.landscape .layer02 .bg2');
+        const layer3 = document.querySelector('.landscape .layer03 .bg3'); 
+        const layers = [layer1, layer2, layer3];
+
+        // Buttons
+        const btnPrev = document.querySelector('.btn-prev');
+        const btnNext = document.querySelector('.btn-next');
+        const btnMode = document.querySelector('.btn-mode');
+        const vFigure = document.querySelector('.vehicle');
+        const btnPowerOn = document.querySelector('.btn-power-on')
+        const btnForward = document.querySelector('.btn-forward')
+        const btnStop = document.querySelector('.btn-stop')
+        const btnBackward = document.querySelector('.btn-backward')
+        const btnPowerOff = document.querySelector('.btn-power-off')
+        const carImg = document.querySelector('.car');
+
+        // Variables
+        let inx = 0;
+        btnPrev.style.opacity = '0.2';
+        btnPrev.style.pointerEvents = 'none';
+        let isReversed = false; 
+        let isPaused = true; 
+        let lastTimestamp = 0; 
+        const speedFactors = [0.4, 0.06, 0.01]; 
+
+        // Events
+        btnMode.addEventListener('click', () => {
+            vFigure.classList.toggle('dark');
+        });
+
+        btnNext.addEventListener('click', () => {
+            if (inx < (vehicles.Attrs.length) - 1) {
+                inx++;
+                btnPrev.style.opacity = '1';
+                btnPrev.style.pointerEvents = 'all';
+                car.brand = vehicles.Attrs[inx].brand;
+                car.refer = vehicles.Attrs[inx].refer;
+                car.model = vehicles.Attrs[inx].model;
+                car.color = vehicles.Attrs[inx].color;
+                car.displayData();
+                // Cambiar la imagen de la nave
+                carImg.src = vehicles.Attrs[inx].image;
+                if (inx == (vehicles.Attrs.length) - 1) {
+                    btnNext.style.opacity = '0.2';
+                    btnNext.style.pointerEvents = 'none';
+                }
+            }
+        });
+
+        btnPrev.addEventListener('click', () => {
+            if (inx > 0) {
+                inx--;
+                btnNext.style.opacity = '1';
+                btnNext.style.pointerEvents = 'all';
+                car.brand = vehicles.Attrs[inx].brand;
+                car.refer = vehicles.Attrs[inx].refer;
+                car.model = vehicles.Attrs[inx].model;
+                car.color = vehicles.Attrs[inx].color;
+                car.displayData();
+                // Cambiar la imagen de la nave
+                carImg.src = vehicles.Attrs[inx].image;
+                if (inx == 0) {
+                    btnPrev.style.opacity = '0.2';
+                    btnPrev.style.pointerEvents = 'none';
+                }
+            }
+        });
+
+        btnPowerOn.addEventListener('click',() => {
+            car.powerOn()
+        })
+        btnPowerOff.addEventListener('click',() => {
+            car.powerOff()
+        })
+
+        // Class
+        class Vehicle {
+            constructor(brand, refer, model, color) {
+                this.brand = brand;
+                this.refer = refer;
+                this.model = model;
+                this.color = color;
+                this.isOn = false;
+            }
+
+            displayData() {
+                tBrand.textContent = this.brand;
+                tBrand.classList.add('show-data');
+                tRefer.textContent = this.refer;
+                tRefer.classList.add('show-data');
+                tModel.textContent = this.model;
+                tModel.classList.add('show-data');
+                tColor.textContent = this.color;
+                tColor.classList.add('show-data');
+                setTimeout(() => {
+                    tBrand.classList.remove('show-data');
+                    tRefer.classList.remove('show-data');
+                    tModel.classList.remove('show-data');
+                    tColor.classList.remove('show-data');
+                }, 1000);
+            }
+
+            powerOn() {
+                if (!this.isOn) {
+                    this.isOn = true;
+                    startEngine();
+            }
+        }
+
+            powerOff() {
+                if (this.isOn) {
+                    this.isOn = false;
+                }
+            }
+        }
+
+        const car = new Vehicle(
+            vehicles.Attrs[inx].brand,
+            vehicles.Attrs[inx].refer,
+            vehicles.Attrs[inx].model,
+            vehicles.Attrs[inx].color
+        );
+        carImg.src = vehicles.Attrs[inx].image; 
+
+        car.displayData();
+
+        function startEngine() {
+            if (!car.isOn) return
+            carImg.style.transform = `translate(-60%, ${2 * Math.sin(Date.now()/ 20)}px)`
+            requestAnimationFrame(startEngine)
+        }
+
+        layers.forEach(layer => {
+        layer.dataset.pos = '0'; 
+        });
+
+        function animate(timestamp) {
+        if (!isPaused) {
+            const delta = timestamp - (lastTimestamp || timestamp); 
+            lastTimestamp = timestamp;
+
+            layers.forEach((layer, index) => {
+            let currentPos = (parseFloat(layer.dataset.pos) || 0) + speedFactors[index] * (isReversed ? delta : -delta);
+            layer.style.backgroundPositionX = `${currentPos}px`; 
+            layer.dataset.pos = currentPos;
+            });
+        }
+        requestAnimationFrame(animate); 
+        }
+
+        btnForward.addEventListener('click', () => {
+        isReversed = false; 
+        if (isPaused) {
+            isPaused = false; 
+            lastTimestamp = 0; 
+        }
+        });
+
+        btnBackward.addEventListener('click', () => {
+        isReversed = true; 
+        if (isPaused) {
+            isPaused = false; 
+            lastTimestamp = 0; 
+        }
+        });
+
+        btnStop.addEventListener('click', () => {
+        isPaused = !isPaused; 
+        if (!isPaused) {
+            lastTimestamp = 0; 
+        }
+        });
+
+        requestAnimationFrame(animate);
+    </script>
+</body>
+</html>
