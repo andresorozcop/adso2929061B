@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;use App\Models\User;
-use App\Models\Pet;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\petController;
+use App\Http\Controllers\AdoptionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,10 +15,25 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resources([
+        'users' => UserController::class,
+        'pets' => PetController::class,
+        'adoptions' => AdoptionController::class,
+    ]);
+    //Exports PDF
+    Route::get('export/users/pdf', [UserController::class, 'pdf']);
+
+    // Exports Excel
+    Route::get('export/users/excel', [UserController::class, 'excel']);
+
+    // Import Excel
+    Route::post('import/users', [UserController::class, 'import']);
+    
+    // Search Users
+    Route::post('search/users', [UserController::class, 'search']);
 });
+
+
 
 require __DIR__.'/auth.php';
 Route::get('hello', function () {
@@ -30,22 +46,24 @@ Route::get('sayhello/{name}', function () {
 
 Route::get('getall/pets', function(){
     $pets = App\Models\Pet::all();
-    dd($pets->toArray());
+    dd($pets->toArray()); 
 });
 
 Route::get('show/pet/{id}', function(){
     $pet = App\Models\Pet::find(request()->id);
-    dd($pet->toArray());
+    dd($pet->toArray()); 
 });
 Route::get('challenge', function () {
+    // Crear carpeta images si no existe
     if (!file_exists(public_path('images'))) {
         mkdir(public_path('images'), 0777, true);
     }
-
+    
+    // Verificar si hay usuarios
     if (User::count() < 20) {
         User::factory()->count(20)->create();
     }
-
+    
     $users = User::take(20)->get();
 
     foreach ($users as $user) {
@@ -53,55 +71,47 @@ Route::get('challenge', function () {
         if (!file_exists($imagePath)) {
             try {
                 $gender = ($user->gender == 'Male') ? 'men' : 'women';
-                $url = "https://randomuser.me/api/portraits/{$gender}/" . rand(1,99) . ".png";
+                $url = "https://randomuser.me/api/portraits/{$gender}/" . rand(1,99) . ".jpg";
                 file_put_contents($imagePath, file_get_contents($url));
             } catch (\Exception $e) {
             }
         }
     }
+    
 
-    $headerStyle = "style='background: gray; color: white; padding: 0.4rem; border: 1px solid gray;'";
-    $cellStyle = "style='border: 1px solid gray; padding: 0.4rem;'";
-
-    $code = "<h2>Challenge</h2>";
-    $code .= "<table style='border-collapse: collapse; margin: 2px auto; font-family: Arial; border: 1px solid gray; width: 100%;'>";
-
-    $code .= "<tr>";
-    $code .= "<th $headerStyle>Photo</th>";
-    $code .= "<th $headerStyle>Fullname</th>";
-    $code .= "<th $headerStyle>Age</th>";
-    $code .= "<th $headerStyle>Gender</th>";
-    $code .= "<th $headerStyle>Created At</th>";
-    $code .= "</tr>";
-
+    // Tabla sin estilos (lo más simple posible). Solo la fila superior en rojo.
+    $output = "<h2>Usuarios Challenge</h2>";
+    $output .= "<table>";
+    $output .= "<tr bgcolor='#d9534f'>";
+    $output .= "<th><font color='#ffffff'>Photo</font></th>";
+    $output .= "<th><font color='#ffffff'>Fullname</font></th>";
+    $output .= "<th><font color='#ffffff'>Age</font></th>";
+    $output .= "<th><font color='#ffffff'>Created At</font></th>";
+    $output .= "</tr>";
+    
     foreach ($users as $user) {
         $age = Carbon::parse($user->birthdate)->age;
-
-        $code .= "<tr>";
-
-        $code .= "<td $cellStyle>";
+        
+        $output .= "<tr>";
+        $output .= "<td align='center'>";
         if (file_exists(public_path('images/' . $user->photo))) {
-            $code .= "<img src='" . asset('images/' . $user->photo) . "' width='60' height='60' style='display: block; margin: 0 auto;'>";
+            $output .= "<img src='" . asset('images/' . $user->photo) . "' width='52' height='52' alt='photo'>";
+        } else {
+            $output .= "🖼️";
         }
-        $code .= "</td>";
-
-        $code .= "<td $cellStyle>" . $user->fullname . "</td>";
-        $code .= "<td $cellStyle>" . $age . " años</td>";
-        $code .= "<td $cellStyle>" . $user->gender . "</td>";
-        $code .= "<td $cellStyle>" . $user->created_at . "</td>";
-        $code .= "</tr>";
+        $output .= "</td>";
+        $output .= "<td>" . $user->fullname . "</td>";
+        $output .= "<td>" . $age . " Years old</td>";
+        $output .= "<td>" . $user->created_at . "</td>";
+        $output .= "</tr>";
     }
-
-    $code .= "</table>";
-
-    return $code;
+    
+    $output .= "</table>";
+    
+    return $output;
 });
 
 Route::get('getall/pets', function(){
     $pets = App\Models\Pet::all();
     return view('getallpets')->with('pets', $pets);
-});
-Route::get('show/pet/{id}', function($id){
-    $pet = Pet::findOrFail($id);
-    return view('showpet')->with('pet', $pet);
 });

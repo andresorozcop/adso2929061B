@@ -2,34 +2,182 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
+// PDF
+use Barryvdh\DomPDF\Facade\pdf;
+// Excel
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UserExport;
+use App\Imports\UsersImport;
 
 class UserController extends Controller
 {
-    public function showUsers()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        $users = User::take(20)->get();
+        // $users = User:: all();
+        $users = User::orderBy('id', 'desc')->paginate(12);
+        return view('users.index')
+                ->with('users', $users);
+    }
 
-        $output = '<html><head><style>table { width:100%; border-collapse:collapse; } th, td { border:1px solid black; padding:8px; text-align:left; } tr:nth-child(even) { background-color: #f2f2f2; }</style></head><body>';
-        $output .= '<table>';
-        $output .= '<tr><th>Photo</th><th>Fullname</th><th>Age</th><th>Created</th></tr>';
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('users.create');
+    }
 
-        foreach ($users as $user) {
-            $age = Carbon::parse($user->birthdate)->age;
-            $timeAgo = Carbon::parse($user->created_at)->diffForHumans();
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
 
-            $output .= '<tr>';
-            $output .= '<td><img src="' . asset('images/' . $user->photo) . '" alt="Photo" width="50" height="50"></td>';
-            $output .= '<td>' . htmlspecialchars($user->fullname) . '</td>';
-            $output .= '<td>' . htmlspecialchars($age . ' years old') . '</td>';
-            $output .= '<td>created ' . htmlspecialchars($timeAgo) . '</td>';
-            $output .= '</tr>';
+         $validation = $request->validate([
+
+            'document' => ['required', 'numeric', 'unique:'.User::class],
+            'fullname' => ['required', 'string'],
+            'gender' => ['required'],
+            'birthdate' => ['required', 'date'],
+            'photo' => ['required', 'image'],
+            'phone' => ['required', 'string'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'unique:'.User::class],
+            'password' => ['required', 'confirmed'],
+        ]);
+
+        if($validation) {
+            // dd($request->all());
+            if($request->hasFile('photo')) {
+                $photo = time().'.'.$request->photo->extension();
+                $request->photo->move(public_path('images'), $photo);
+            }
         }
 
-        $output .= '</table></body></html>';
+        $user = new User;
+        $user->document = $request->document;
+        $user->fullname = $request->fullname;
+        $user->gender   = $request->gender;
+        $user->birthdate = $request->birthdate;
+        $user->photo = $photo;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
 
-        return response($output)->header('Content-Type', 'text/html');
+        if($user->save()) {
+            return redirect('users')->with('message','The User:'.$user->fullname.' was added successful!');
+        }
+
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(User $user)
+    {
+        return view('users.show')->with('user', $user);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(User $user)
+    {
+        return view('users.edit')->with('user', $user);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, User $user)
+    {
+             $validation = $request->validate([
+
+            'document' => ['required', 'numeric', 'unique:'.User::class.',document,'.$user->id],
+            'fullname' => ['required', 'string'],
+            'gender' => ['required'],
+            'birthdate' => ['required', 'date'],
+            'phone' => ['required', 'string'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'unique:'.User::class.',email,'.$user->id],
+        ]);
+
+        if($validation) {
+            // dd($request->all());
+            if($request->hasFile('photo')) {
+                $photo = time().'.'.$request->photo->extension();
+                $request->photo->move(public_path('images'), $photo);
+                // Delete old photo
+                if($request->originphoto != 'no-photo.png' && file_exists(public_path('images/'.$user->photo))) {
+                    unlink(public_path('images/'.$user->photo));
+
+                }
+            } else {
+                $photo = $request->originphoto;
+            }
+        }
+
+        $user->document = $request->document;
+        $user->fullname = $request->fullname;
+        $user->gender   = $request->gender;
+        $user->birthdate = $request->birthdate;
+        $user->photo = $photo;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+
+        if($user->save()) {
+            return redirect('users')->with('message','The User:'.$user->fullname.' was edited successful!');
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(User $user)
+    {
+        // Delete old photo
+                if($user->photo != 'no-photo.png' && file_exists(public_path('images/'.$user->photo))) {
+                    unlink(public_path('images/'.$user->photo));
+                }
+
+         if($user->delete()) {
+            return redirect('users')->with('message','The User:'.$user->fullname.' was deleted successful!');
+        }
+    }
+
+    /**
+     * Generate a PDF file
+     */
+    public function pdf() {
+        $users = User::all();
+        $pdf = PDF::loadView('users.pdf',compact('users'));
+        return $pdf->download('allusers.pdf');
+    }
+
+     /**
+     * Generate a Excel file
+     */
+    public function excel() {
+       return \Excel::download(new UserExport, 'allusers.xlsx');
+    }
+
+      /**
+     * Import a Excel file
+     */
+    public function import(Request $request) {
+        $file = $request->file('file');
+        Excel::import(new UsersImport, $file);
+        return redirect()->back()->with('message', 'Users imported successfully!');
+    }
+
+      /**
+     * Import a Excel file
+     */
+    public function search(Request $request) {
+        $users = User::names($request->q)->orderBy('id', 'desc')->paginate(12);
+        return view('users.search')->with('users', $users);
     }
 }
