@@ -1,0 +1,8 @@
+Correo: johnw@mail.com
+Contraseña: admin
+Rol: Admin (John Wick)
+Usuario insertado por SQL
+
+Correo: larac@mail.com
+Contraseña: 12345
+(Lara Croft)

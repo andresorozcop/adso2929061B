@@ -4,11 +4,9 @@
 
 @section('content')
     @include('partials.navbar')
-    <h1 class="mt-6 text-4xl text-white flex gap-2 items-center justify-center pb-4 border-b-2 border-neutral-50 mb-10">
-         <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" viewBox="0 0 256 256">
-                <path
-                    d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48-88a8,8,0,0,1-8,8H136v32a8,8,0,0,1-16,0V136H88a8,8,0,0,1,0-16h32V88a8,8,0,0,1,16,0v32h32A8,8,0,0,1,176,128Z">
-                </path>
+        <h1 class="mt-6 text-4xl text-white flex gap-2 items-center justify-center pb-4 border-b-2 border-neutral-50 mb-10">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-12"  fill="currentColor" viewBox="0 0 256 256">
+                <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48-88a8,8,0,0,1-8,8H136v32a8,8,0,0,1-16,0V136H88a8,8,0,0,1,0-16h32V88a8,8,0,0,1,16,0v32h32A8,8,0,0,1,176,128Z"></path>
             </svg>
         Add User
     </h1>
@@ -41,13 +39,13 @@
             </li>
         </ul>
         </div>
-        <div class="card text-white md:w-[720px] w-[320px] bg-black/40 p-4 mb-4 rounded">
+        <div class="card text-white md:w-[720px] w-[320px] bg-black/20 p-8 my-4">
             <form method="POST" action="{{ url('users') }}" class="flex flex-col md:flex-row gap-4 mt-4" enctype="multipart/form-data">
                 @csrf
                 <div class="w-full md:w-[320px]">
                     <div class="avatar flex flex-col gap-1 items-center justify-center cursor-pointer hover:scale-105 transition ease-in">
                         <div id="upload" class="mask mask-squircle w-48">
-                            <img id="preview" src="{{ asset('images/no-photo.jpg') }}" />
+                            <img id="preview" src="{{ asset('images/users/no-photo.png') }}" />
                         </div>
                         <small class="pb-0 border-white border-b flex gap-1 items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 256 256">

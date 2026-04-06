@@ -5,6 +5,8 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -23,37 +25,24 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        // return [
-        //     'document' => fake()->numerify('75#######'),
-        //     'fullname' => fake()->firstname().' '.fake()->lastName(),
-        //     'gender'=> fake()->randomElement(['Female', 'Male']),
-        //     'birthdate' => fake()->date(),
-        //     'phone' => fake()->numerify('320#######'),
-        //     'email' => fake()->unique()->safeEmail(),
-        //     'email_verified_at' => now(),
-        //     'password' => bcrypt('123456'),
-        //     'remember_token' => Str::random(10),
-        // ];
-        $gender = fake()->randomElement(array('Female', 'Male'));
-        $name = ($gender == 'Female') ? $name = fake()->firstNameFemale()
-                                      : $name = fake()->firstNameMale();
-        ($gender == 'Female') ? $g = 'women' : $g = 'men';
-        $id = fake()->numerify('75######');
-        $tnd = fake()->numberBetween(1,99);
-        copy('https://randomuser.me/api/portraits/'.$g.'/'.$tnd.'.jpg', public_path('images/'.$id.'.png'));
-        $email = Str::slug(strtolower($name)).fake()->numerify('###'. '@mail.com');
+        $gender = fake()->randomElement(['male', 'female']);
+        $document = fake()->unique()->numerify('75######');
+
+            $image = Http::get('https://thispersondoesnotexist.com/')->body();
+            $fileName = $document . '.png';
+            file_put_contents(public_path('images/' . $fileName), $image);
 
         return [
-            'document'=> $id,
-            'fullname'=> $name . " " . fake()->lastName(),
-            'gender'=> $gender,
-            'birthdate' => fake()->dateTimeBetween('1976-01-01','2006-12-31'),
-            'photo' => $id . '.png',
-            'email' => $email,
-            'phone' => fake()->numerify('310#######'),
+            'document' => $document,
+            'fullname' => fake()->firstName($gender). ' '.fake()->lastName(),
+            'gender' => ucfirst($gender),
+            'birthdate' => fake()->dateTimeBetween('1976-01-01', '2006-12-31'),
+            'phone' => fake()->unique()->numerify('310#######'),
+            'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('12345'),
+            'password' => bcrypt('12345'),
             'remember_token' => Str::random(10),
+            'photo' => $fileName
         ];
     }
 

@@ -16,29 +16,28 @@ class PetFactory extends Factory
      */
     public function definition(): array
     {
-        $petNames = ["Max","Bella","Charlie","Luna","Rocky","Milo","Coco","Toby","Daisy","Simba","Nala","Leo","Zeus","Chloe","Buddy","Lola","Jack","Lucy","Thor","Molly","Oliver","Bailey","Duke","Sasha","Rex","Mia","Bruno","Kira","Buster","Zoe",];
-        $dogBreeds = ["Labrador Retriever","German Shepherd","Golden Retriever","Bulldog","Poodle","Beagle","Rottweiler","Yorkshire Terrier","Boxer",];
-        $catBreeds = ["Persian","Siamese","Maine Coon","British Shoethair","Bengai",];
-        $pigBreeds = ["Juliana","Vietnamese","Kunekune","Gottingen Minipig","Yucatan Minipig",];
-        $birdBreeds = ["Budgerigan","cockatier","Lovebird","Canary","Hummingbird",];
+        $petNames = ["Luna","Max","Bella","Rocky","Milo","Coco","Nala","Simba","Toby","Lola","Zeus","Kira","Thor","Mía","Bruno","Daisy","Leo","Chloe","Oliver","Canela","Buddy","Rex","Bobby","Pelusa","Oreo","Kiara","Apolo","Blue","Gala","Balu","Sasha","Romeo","Princesa","Jack","Nina","Pancho","Lucky","Layla","Benji","Sam","Koko","Teo","Frida","Tina","Scooby","Chispa","Duke","Loki","Gordo","Rocco"];
+        $dogBreeds=["Labrador Retriever","Pastor Alemán","Bulldog Francés","Golden Retriever","Poodle"];    
+        $catBreeds=["Siamés","Persa","Maine Coon","Bengalí","Ragdoll"];
+        $pigBreeds=["Yorkshire","Duroc","Hampshire","Landrace","Pietrain"];
+        $birdBreeds=["Canario","Periquito Australiano","Guacamayo","Cacatúa","Jilguero"];
 
-        $kind =  fake()->randomElement(["Dog","Cat","Pig","Bird",]);
+        $kind = fake()->randomElement(['dog', 'cat', 'bird', 'pig']);
 
         switch ($kind) {
-            case "Dog":
+            case 'dog':
                 $breed = fake()->randomElement($dogBreeds);
                 break;
-            case "Cat":
+            case 'cat':
                 $breed = fake()->randomElement($catBreeds);
                 break;
-            case "Pig":
+            case 'pig':
                 $breed = fake()->randomElement($pigBreeds);
                 break;
-            default;
+                default:
                 $breed = fake()->randomElement($birdBreeds);
                 break;
         }
-
 
         return [
         'name'        => fake()->randomElement($petNames),
@@ -46,7 +45,7 @@ class PetFactory extends Factory
         'weight'      => fake()->numerify('#.#'),
         'age'         => fake()->numberBetween(1, 15),
         'breed'       => $breed,
-        'location'    => fake()->city,
+        'location'    => fake()->city(),
         'description' => fake()->sentence(5),
         ];
     }

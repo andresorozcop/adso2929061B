@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('fullname');
             $table->string('gender');
             $table->date('birthdate');
-            $table->string('photo')->default('no-photo.jpg');
+            $table->string('photo')->default('no-photo.png');
             $table->string('phone');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('active')->default(1);
-            $table->string('role')->default('Customer');
+            $table->string('role')->default('customer');
             $table->rememberToken();
             $table->timestamps();
         });
