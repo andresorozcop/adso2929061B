@@ -15,7 +15,7 @@ class PetSeeder extends Seeder
     {
         $user = new Pet;
         $user->name = 'Michifu';
-        $user->kind = 'Cat';
+        $user->kind = 'cat';
         $user->weight = 3.5;
         $user->age = 2;
         $user->breed = 'Siamese';
@@ -25,7 +25,7 @@ class PetSeeder extends Seeder
         
         $user = new Pet;
         $user->name = 'Rex';
-        $user->kind = 'Dog';
+        $user->kind = 'dog';
         $user->weight = 10.2;
         $user->age = 4;
         $user->breed = 'Labrador';
@@ -35,7 +35,7 @@ class PetSeeder extends Seeder
 
         $user = new Pet;
         $user->name = 'Tuetano';
-        $user->kind = 'Cat';
+        $user->kind = 'cat';
         $user->weight = 4.0;
         $user->age = 3;
         $user->breed = 'Persian';
@@ -45,7 +45,7 @@ class PetSeeder extends Seeder
 
         $user = new Pet;
         $user->name = 'Sancocho';
-        $user->kind = 'Dog';
+        $user->kind = 'dog';
         $user->weight = 8.5;
         $user->age = 5;
         $user->breed = 'Criollo';

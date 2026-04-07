@@ -39,7 +39,7 @@
                             $extension = substr($user->photo, -4);
                         @endphp
                         @if ($extension != 'webp' && $extension != '.svg')
-                        <img src="{{public_path().'/images/users/'.$user->photo}}" width="96px">
+                        <img src="{{ $user->userPhotoAbsolutePath() }}" width="96px">
                         @else
                             Webp|SVG
                         @endif

@@ -111,8 +111,14 @@ class UserController extends Controller
                 $photo = time().'.'.$request->photo->extension();
                 $request->photo->move(public_path('images/users'), $photo);
                 // Delete old Photo
-                if ($request->originphoto != 'no-photo.png' && file_exists(public_path('images/users/'.$user->photo))) {
-                    unlink(public_path('images/users'.$user->photo));
+                if ($request->originphoto != 'no-photo.png') {
+                    $oldUsers = public_path('images/users/'.$user->photo);
+                    $oldRoot = public_path('images/'.$user->photo);
+                    if (file_exists($oldUsers)) {
+                        unlink($oldUsers);
+                    } elseif (file_exists($oldRoot)) {
+                        unlink($oldRoot);
+                    }
                 }
             } else {
                 $photo = $request->originphoto;
@@ -139,9 +145,15 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if($user->delete()) {
-            if ($user->photo != 'no-photo.png' && file_exists(public_path('images/users/'.$user->photo))) {
-                    unlink(public_path('images/users'.$user->photo));
+            if ($user->photo != 'no-photo.png') {
+                $oldUsers = public_path('images/users/'.$user->photo);
+                $oldRoot = public_path('images/'.$user->photo);
+                if (file_exists($oldUsers)) {
+                    unlink($oldUsers);
+                } elseif (file_exists($oldRoot)) {
+                    unlink($oldRoot);
                 }
+            }
 
             return redirect('users')
                     ->with('message', 'The User: '.$user->fullname.' was delete   successful!');

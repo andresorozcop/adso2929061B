@@ -53,6 +53,31 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Ruta relativa bajo public/ para asset(): prioriza images/users/ (CRUD) y cae a images/ (factory antigua).
+     */
+    public function userPhotoAssetPath(): string
+    {
+        $name = $this->photo ?? '';
+        if ($name === '') {
+            return 'images/users/no-photo.png';
+        }
+        if (file_exists(public_path('images/users/'.$name))) {
+            return 'images/users/'.$name;
+        }
+        if (file_exists(public_path('images/'.$name))) {
+            return 'images/'.$name;
+        }
+
+        return 'images/users/'.$name;
+    }
+
+    /** Ruta absoluta del archivo de foto (PDF/Excel). */
+    public function userPhotoAbsolutePath(): string
+    {
+        return public_path($this->userPhotoAssetPath());
+    }
+
     //Relationships
     // User has many adoptions
     public function adoptions(){

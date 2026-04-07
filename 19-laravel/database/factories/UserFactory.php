@@ -30,7 +30,7 @@ class UserFactory extends Factory
 
             $image = Http::get('https://thispersondoesnotexist.com/')->body();
             $fileName = $document . '.png';
-            file_put_contents(public_path('images/' . $fileName), $image);
+            file_put_contents(public_path('images/users/' . $fileName), $image);
 
         return [
             'document' => $document,

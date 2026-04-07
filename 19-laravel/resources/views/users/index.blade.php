@@ -81,7 +81,7 @@
                 <td>
                     <div class="avatar">
                     <div class="mask mask-squircle w-18">
-                        <img src="{{ asset('images/users/'.$user->photo)}}" />
+                        <img src="{{ asset($user->userPhotoAssetPath()) }}" />
                     </div>
                 </td>
                 <td class="hidden md:table-cell">{{ $user->document }}</td>

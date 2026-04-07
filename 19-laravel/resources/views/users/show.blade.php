@@ -42,7 +42,7 @@
     <div class="card card-side bg-base-100 shadow-sm">
         <figure class="w-64 h-100% overflow-hidden">
             <img 
-                src="{{ asset('images/users/'.$user->photo)}}"
+                src="{{ asset($user->userPhotoAssetPath()) }}"
                 class="w-full h-full object-cover" />
         </figure>
 <div class="card-body">

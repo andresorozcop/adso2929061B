@@ -60,7 +60,7 @@ Route::get('challenge', function() {
     foreach ($users as $user) {
         $table .= "<tr>";
         $table .= "<td>" . $user->id . "</td>";
-        $table .= "<td><img src='" . asset('images/' . $user->photo) . "' width='50'></td>";
+        $table .= "<td><img src='" . asset($user->userPhotoAssetPath()) . "' width='50'></td>";
         $table .= "<td>" . $user->fullname . "</td>";
         $table .= "<td>" . Carbon::parse($user->birthdate)->age . " Years old" . "</td>";
         $table .= "<td>" . $createAt($user->created_at) . "</td>";
@@ -113,6 +113,15 @@ Route::middleware('auth')->group( function () {
 
     // Search Users
     Route::post('search/users', [UserController::class, 'search']);
+
+    // Exports PDF Pets
+    Route::get('export/pets/pdf', [PetController::class, 'pdf']);
+
+    // Exports Excel Pets
+    Route::get('export/pets/excel', [PetController::class, 'excel']);
+
+    // Search Pets
+    Route::post('search/pets', [PetController::class, 'search']);
 });
 
 
