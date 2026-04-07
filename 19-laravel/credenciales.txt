@@ -6,3 +6,8 @@ Usuario insertado por SQL
 Correo: larac@mail.com
 Contraseña: 12345
 (Lara Croft)
+
+__________
+
+http://localhost:8000
+

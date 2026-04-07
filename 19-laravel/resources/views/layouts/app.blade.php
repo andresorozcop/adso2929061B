@@ -8,19 +8,8 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 </head>
-@auth
-    @php
-    if (Auth::user()->role == 'Admin') {
-        $colors = '#009a,#000c,#0000';
-    } else {
-        $colors = '#090a,#000c,#0000';
-    }
-    @endphp
-@else
-    @php $colors = '#000c,#0000'; @endphp
-@endauth
 
-<body class="bg-[linear-gradient(to_top,{{$colors}}),url('{{ asset('images/bg-welcome.png') }}')] bg-center bg-no-repeat bg-cover bg-fixed bg-black text-white pt-14 min-h-dvh flex flex-col gap-2 justify-center items-center">
+<body class="bg-[linear-gradient(rgb(0_0_0/0.5),rgb(0_0_0/0.5)),url('{{ asset('images/bg-welcome.png') }}')] bg-center bg-no-repeat bg-cover bg-fixed bg-black text-white pt-14 min-h-dvh flex flex-col gap-2 justify-center items-center">
     <main>
         @yield('content')
     </main>
