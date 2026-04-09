@@ -9,7 +9,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -19,7 +18,20 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $f = fake();
+        $examplePassword = $f->password(10, true);
+
+        $registerPlaceholders = [
+            'document' => $f->numerify('75######'),
+            'fullname' => $f->firstName().' '.$f->lastName(),
+            'birthdate' => $f->dateTimeBetween('-50 years', '-18 years')->format('Y-m-d'),
+            'phone' => $f->numerify('310#######'),
+            'email' => $f->safeEmail(),
+            'password' => $examplePassword,
+            'password_confirmation' => $examplePassword,
+        ];
+
+        return view('auth.register', compact('registerPlaceholders'));
     }
 
     /**
@@ -30,23 +42,23 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'document'      => ['required', 'numeric', 'unique:'.User::class],
-            'fullname'      => ['required', 'string'],
-            'gender'        => ['required'],
-            'birthdate'     => ['required', 'date'],
-            'phone'         => ['required', 'string'],
-            'email'         => ['required', 'string', 'lowercase', 'email', 'unique:'.User::class],
-            'password'      => ['required', 'confirmed'],
+            'document' => ['required', 'numeric', 'unique:'.User::class],
+            'fullname' => ['required', 'string'],
+            'gender' => ['required'],
+            'birthdate' => ['required', 'date'],
+            'phone' => ['required', 'string'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'unique:'.User::class],
+            'password' => ['required', 'confirmed'],
         ]);
 
         $user = User::create([
-            'document'  => $request->document,
-            'fullname'  => $request->fullname,
-            'gender'    => $request->gender,
+            'document' => $request->document,
+            'fullname' => $request->fullname,
+            'gender' => $request->gender,
             'birthdate' => $request->birthdate,
-            'phone'     => $request->phone,
-            'email'     => $request->email,
-            'password'  => Hash::make($request->password),
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));

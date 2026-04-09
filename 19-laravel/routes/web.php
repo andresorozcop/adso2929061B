@@ -1,38 +1,37 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use Carbon\Carbon;
-
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\PetController;
 use App\Http\Controllers\AdoptionController;
+use App\Http\Controllers\PetController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('hello', function () {
-    return "<h1>Hello Laravel 🚀</h1>";
+    return '<h1>Hello Laravel 🚀</h1>';
 });
 
-Route::get('sayhello/{name}', function() {
-    return "<h1>Hello: ".request()->name."</h1>";
+Route::get('sayhello/{name}', function () {
+    return '<h1>Hello: '.request()->name.'</h1>';
 });
 
-Route::get('getall/pets', function() {
+Route::get('getall/pets', function () {
     $pets = App\Models\Pet::all();
     dd($pets->toArray());
 });
 
-Route::get('show/pet/{id}', function() {
+Route::get('show/pet/{id}', function () {
     $pet = App\Models\Pet::find(request()->id);
     dd($pet->toArray());
 });
 
-Route::get('challenge', function() {
+Route::get('challenge', function () {
     $users = App\Models\User::take(20)->get();
-    $styleTable = "<style>
+    $styleTable = '<style>
                         table {
                             border-collapse: collapse;
                             width: 80%;
@@ -49,34 +48,37 @@ Route::get('challenge', function() {
                             background: #4d8076;
                             color: white;
                         }
-                    </style>";
+                    </style>';
 
-    $createAt = function($created_at) {
+    $createAt = function ($created_at) {
         return Carbon::parse($created_at)->diffForHumans();
     };
 
-    $table = "<table>";
-    $table .= "<tr><th>ID</th><th>Photo</th><th>Fullname</th><th>Age</th><th>Create At</th></tr>";
+    $table = '<table>';
+    $table .= '<tr><th>ID</th><th>Photo</th><th>Fullname</th><th>Age</th><th>Create At</th></tr>';
     foreach ($users as $user) {
-        $table .= "<tr>";
-        $table .= "<td>" . $user->id . "</td>";
-        $table .= "<td><img src='" . asset($user->userPhotoAssetPath()) . "' width='50'></td>";
-        $table .= "<td>" . $user->fullname . "</td>";
-        $table .= "<td>" . Carbon::parse($user->birthdate)->age . " Years old" . "</td>";
-        $table .= "<td>" . $createAt($user->created_at) . "</td>";
-        $table .= "</tr>";
+        $table .= '<tr>';
+        $table .= '<td>'.$user->id.'</td>';
+        $table .= "<td><img src='".asset($user->userPhotoAssetPath())."' width='50'></td>";
+        $table .= '<td>'.$user->fullname.'</td>';
+        $table .= '<td>'.Carbon::parse($user->birthdate)->age.' Years old'.'</td>';
+        $table .= '<td>'.$createAt($user->created_at).'</td>';
+        $table .= '</tr>';
     }
-    $table .= "</table>";
-    return $styleTable . $table;
+    $table .= '</table>';
+
+    return $styleTable.$table;
 });
 
-Route::get('getall/pets', function() {
+Route::get('getall/pets', function () {
     $pets = App\Models\Pet::all();
+
     return view('getallpets')->with('pets', $pets);
 });
 
-Route::get('showpet/{id}', function() {
+Route::get('showpet/{id}', function () {
     $pet = App\Models\Pet::find(request()->id);
+
     return view('showpet')->with('pet', $pet);
 });
 
@@ -89,18 +91,20 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/myprofile', fn () => redirect()->route('profile.edit'))->name('myprofile');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 // Middleware Auth
-Route::middleware('auth')->group( function () {
+Route::middleware('auth')->group(function () {
     // Resources
     Route::resources([
-        'users'    => UserController::class,
-        'pets'     => PetController::class,
-        'adoption' => AdoptionController::class
+        'users' => UserController::class,
+        'pets' => PetController::class,
+        'adoption' => AdoptionController::class,
     ]);
     // Exports PDF
     Route::get('export/users/pdf', [UserController::class, 'pdf']);
@@ -123,7 +127,5 @@ Route::middleware('auth')->group( function () {
     // Search Pets
     Route::post('search/pets', [PetController::class, 'search']);
 });
-
-
 
 require __DIR__.'/auth.php';

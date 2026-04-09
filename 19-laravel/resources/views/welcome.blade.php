@@ -6,7 +6,7 @@
         <section class="bg-[#0006] p-4 outline rounded-md w-80 flex flex-col justify-center items-center">
             <img src="{{ asset('images/logo.png')}}" class="size-70 object-contain">
             <p class="text-justify">
-                Adopta amor, cambia una vida y encuentra a tu mejor amigo para siempre 🐾💛
+                Bienvenido. Inicia sesión o regístrate para explorar mascotas y darles un hogar.
             </p>
             @guest
             <div class="flex gap-2 justify-between mt-8">

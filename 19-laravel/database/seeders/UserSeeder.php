@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
 
 class UserSeeder extends Seeder
 {
@@ -14,7 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        //Eloquent: ORM
+        // Eloquent: ORM
         $user = new User;
         $user->document = '75000001';
         $user->fullname = 'John Wick';
@@ -24,9 +23,10 @@ class UserSeeder extends Seeder
         $user->email = 'johnw@mail.com';
         $user->password = 'admin';
         $user->role = 'Admin';
+        $user->photo = 'johnw.png';
         $user->save();
 
-        //Array
+        // Array
         DB::table('users')->insert([
             'document' => '75000002',
             'fullname' => 'Lara Croft',
@@ -35,8 +35,10 @@ class UserSeeder extends Seeder
             'phone' => 3100000002,
             'email' => 'larac@mail.com',
             'password' => bcrypt('12345'),
+            'photo' => 'larac.png',
+            'role' => 'Customer',
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
     }
 }

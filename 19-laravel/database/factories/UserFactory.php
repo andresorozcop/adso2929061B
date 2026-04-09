@@ -3,10 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -28,13 +26,13 @@ class UserFactory extends Factory
         $gender = fake()->randomElement(['male', 'female']);
         $document = fake()->unique()->numerify('75######');
 
-            $image = Http::get('https://thispersondoesnotexist.com/')->body();
-            $fileName = $document . '.png';
-            file_put_contents(public_path('images/users/' . $fileName), $image);
+        $image = Http::get('https://thispersondoesnotexist.com/')->body();
+        $fileName = $document.'.png';
+        file_put_contents(public_path('images/users/'.$fileName), $image);
 
         return [
             'document' => $document,
-            'fullname' => fake()->firstName($gender). ' '.fake()->lastName(),
+            'fullname' => fake()->firstName($gender).' '.fake()->lastName(),
             'gender' => ucfirst($gender),
             'birthdate' => fake()->dateTimeBetween('1976-01-01', '2006-12-31'),
             'phone' => fake()->unique()->numerify('310#######'),
@@ -42,7 +40,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => bcrypt('12345'),
             'remember_token' => Str::random(10),
-            'photo' => $fileName
+            'photo' => $fileName,
         ];
     }
 

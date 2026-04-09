@@ -62,13 +62,13 @@
                 <div class="w-full md:w-[320px]">
                     {{-- Document --}}
                     <label class="label text-white">Document:</label>
-                    <input type="text" class="input bg-[#0009] outline-0" name="document" placeholder="75123123" value="{{ old('document') }}">
+                    <input type="text" class="input bg-[#0009] outline-0" name="document" placeholder="1082947362" value="{{ old('document') }}">
                     @error('document')
                         <small class="badge badge-error w-full mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
                     {{-- FullName --}}
                     <label class="label text-white">FullName:</label>
-                    <input type="text" class="input bg-[#0009] outline-0" name="fullname" placeholder="Jeremias Springfield" value="{{ old('fullname') }}">
+                    <input type="text" class="input bg-[#0009] outline-0" name="fullname" placeholder="Camila Ortega Pineda" value="{{ old('fullname') }}">
                     @error('fullname')
                         <small class="badge badge-error w-full mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
@@ -84,7 +84,7 @@
                     @enderror
                     {{-- Birthdate --}}
                     <label class="label text-white">Birthdate:</label>
-                    <input type="date" class="input bg-[#0009] outline-0" name="birthdate" placeholder="1640-10-08" value="{{ old('birthdate') }}">
+                    <input type="date" class="input bg-[#0009] outline-0" name="birthdate" placeholder="1999-11-23" value="{{ old('birthdate') }}">
                     @error('birthdate')
                         <small class="badge badge-error w-full mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
@@ -92,25 +92,25 @@
                 <div class="w-full md:w-[320px]">
                     {{-- Phone --}}
                     <label class="label text-white">Phone:</label>
-                    <input type="text" class="input bg-[#0009] outline-0" name="phone" placeholder="3101231234" value="{{ old('phone') }}">
+                    <input type="text" class="input bg-[#0009] outline-0" name="phone" placeholder="6024458891" value="{{ old('phone') }}">
                     @error('phone')
                         <small class="badge badge-error w-full mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
                     {{-- Email --}}
                     <label class="label text-white">Email:</label>
-                    <input type="text" class="input bg-[#0009] outline-0" name="email" placeholder="Email" value="{{ old('email') }}">
+                    <input type="text" class="input bg-[#0009] outline-0" name="email" placeholder="demo.aruba@inbox.dev" value="{{ old('email') }}">
                     @error('email')
                         <small class="badge badge-error w-full mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
                     {{-- Password --}}
                     <label class="label text-white">Password:</label>
-                    <input type="password" class="input bg-[#0009] outline-0" name="password" placeholder="Secret">
+                    <input type="password" class="input bg-[#0009] outline-0" name="password" placeholder="K9#mPx2q">
                     @error('password')
                         <small class="badge badge-error w-full mt-1 text-xs py-3">{{ $message }}</small>
                     @enderror
                     {{-- Password Confirmation --}}
                     <label class="label text-white">Password Confirmation:</label>
-                    <input type="password" class="input bg-[#0009] outline-0" name="password_confirmation" placeholder="Secret">
+                    <input type="password" class="input bg-[#0009] outline-0" name="password_confirmation" placeholder="K9#mPx2q">
 
                     <button class="btn btn-outline hover:bg-[#fff6] hover:text-white mt-3 w-full">Add</button>
                 </div>

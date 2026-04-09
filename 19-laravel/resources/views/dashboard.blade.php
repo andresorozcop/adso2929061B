@@ -203,7 +203,7 @@
                     </li>
                     </ul>
                 <div class="card-actions justify-end">
-                <a class="btn btn-outline hover:bg-[#fff6] hover:text-white mt-3" href="{{ url('adoptions') }}">
+                <a class="btn btn-outline hover:bg-[#fff6] hover:text-white mt-3" href="{{ route('adoption.index') }}">
                     Enter
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" viewBox="0 0 256 256">
                         <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
@@ -215,13 +215,13 @@
         @endif
 
         {{-- Customer --}}
-        @if(Auth::user()->role == 'Customer')
+        @if(strcasecmp((string) Auth::user()->role, 'Customer') === 0)
         {{-- Module My Profile --}}
         <div class="card text-white bg-[#0006] w-96 shadow-sm">
                 <figure class="h-[240px]">
                 <img
                     class="object-cover"
-                    src="{{ asset('images/bg-users.webp') }}" />
+                    src="{{ asset('images/dashboard/user.webp') }}" />
             </figure>
             <div class="card-body">
                 <h2 class="card-title">
@@ -231,7 +231,7 @@
                     My Profile
                 </h2>
                 <div class="card-actions justify-end">
-                <a class="btn btn-outline hover:bg-[#fff6] hover:text-white mt-3" href="{{ url('myprofile') }}">
+                <a class="btn btn-outline hover:bg-[#fff6] hover:text-white mt-3" href="{{ route('myprofile') }}">
                     Enter
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" viewBox="0 0 256 256">
                         <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
@@ -245,7 +245,7 @@
                 <figure class="h-[240px]">
                 <img
                     class="object-cover"
-                    src="{{ asset('images/bg-pets.webp') }}" />
+                    src="{{ asset('images/dashboard/pet.webp') }}" />
             </figure>
             <div class="card-body">
                 <h2 class="card-title">
@@ -256,7 +256,7 @@
                 </h2>
                 
                 <div class="card-actions justify-end">
-                <a class="btn btn-outline hover:bg-[#fff6] hover:text-white mt-3" href="{{ url('myadoptions') }}">
+                <a class="btn btn-outline hover:bg-[#fff6] hover:text-white mt-3" href="{{ route('adoption.index') }}">
                     Enter
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" viewBox="0 0 256 256">
                         <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
@@ -270,7 +270,7 @@
                 <figure class="h-[240px]">
                 <img
                     class="object-cover"
-                    src="{{ asset('images/bg-adoptions.webp') }}" />
+                    src="{{ asset('images/dashboard/adoption.webp') }}" />
             </figure>
             <div class="card-body">
                 <h2 class="card-title">
@@ -280,7 +280,7 @@
                     Make Adoption
                 </h2>
                 <div class="card-actions justify-end">
-                <a class="btn btn-outline hover:bg-[#fff6] hover:text-white mt-3" href="{{ url('makeadoption') }}">
+                <a class="btn btn-outline hover:bg-[#fff6] hover:text-white mt-3" href="{{ route('adoption.create') }}">
                     Enter
                     <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" viewBox="0 0 256 256">
                         <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>

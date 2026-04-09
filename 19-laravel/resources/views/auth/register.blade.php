@@ -16,13 +16,13 @@
         {{-- Document --}}
         <div class="w-full md:w-80 flex flex-col gap-2">
             <label class="label">Document:</label>
-            <input class="input bg-[#0009] outline-1" type="text" name="document" value="{{ old('document')}}" placeholder="750000011">
+            <input class="input bg-[#0009] outline-1" type="text" name="document" value="{{ old('document')}}" placeholder="{{ $registerPlaceholders['document'] ?? '' }}">
             @error('document')
                 <small class="badge badge-error w-full">{{$message}}</small>
             @enderror
         {{-- Fullname --}}
             <label class="label">Fullname:</label>
-            <input class="input bg-[#0009] outline-1" type="text" name="fullname" value="{{ old('fullname')}}" placeholder="Jeremias Springfield">
+            <input class="input bg-[#0009] outline-1" type="text" name="fullname" value="{{ old('fullname')}}" placeholder="{{ $registerPlaceholders['fullname'] ?? '' }}">
             @error('fullname')
                 <small class="badge badge-error w-full">{{$message}}</small>
             @enderror
@@ -42,7 +42,7 @@
             @enderror
         {{-- BirthDate --}}
             <label class="label">Birthdate:</label>
-            <input class="input bg-[#0009] outline-1" type="text" name="birthdate" value="{{ old('birthdate')}}" placeholder="2000-12-25">
+            <input class="input bg-[#0009] outline-1" type="text" name="birthdate" value="{{ old('birthdate')}}" placeholder="{{ $registerPlaceholders['birthdate'] ?? '' }}">
             @error('birthdate')
                 <small class="badge badge-error w-full">{{$message}}</small>
             @enderror
@@ -51,25 +51,25 @@
         <div class="w-full md:w-80 flex flex-col gap-2">
         {{-- Phone --}}
             <label class="label">Phone:</label>
-            <input class="input bg-[#0009] outline-1" type="text" name="phone" value="{{ old('phone')}}" placeholder="3200000011">
+            <input class="input bg-[#0009] outline-1" type="text" name="phone" value="{{ old('phone')}}" placeholder="{{ $registerPlaceholders['phone'] ?? '' }}">
             @error('phone')
                 <small class="badge badge-error w-full">{{$message}}</small>
             @enderror
         {{-- Email --}}
             <label class="label">Email:</label>
-            <input class="input bg-[#0009] outline-1" type="text" name="email" value="{{ old('email')}}" placeholder="jeremias@mail.com">
+            <input class="input bg-[#0009] outline-1" type="text" name="email" value="{{ old('email')}}" placeholder="{{ $registerPlaceholders['email'] ?? '' }}">
             @error('email')
                 <small class="badge badge-error w-full">{{$message}}</small>
             @enderror
         {{-- Password --}}
             <label class="label">Password:</label>
-            <input class="input bg-[#0009] outline-1" type="password" name="password" placeholder="yoursecret">
+            <input class="input bg-[#0009] outline-1" type="password" name="password" placeholder="{{ $registerPlaceholders['password'] ?? '' }}">
             @error('password')
                 <small class="badge badge-error w-full">{{$message}}</small>
             @enderror
         {{-- Password Confirmation --}}
             <label class="label">Password Confirmation:</label>
-            <input class="input bg-[#0009] outline-1" type="password" name="password_confirmation" placeholder="yoursecretagain">
+            <input class="input bg-[#0009] outline-1" type="password" name="password_confirmation" placeholder="{{ $registerPlaceholders['password_confirmation'] ?? '' }}">
         {{-- Button --}}
         <button class="btn btn-outline w-full mt-2">
             Register

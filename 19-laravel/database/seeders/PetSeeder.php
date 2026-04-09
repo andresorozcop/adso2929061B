@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Pet;
+use Illuminate\Database\Seeder;
 
 class PetSeeder extends Seeder
 {
@@ -13,44 +12,22 @@ class PetSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = new Pet;
-        $user->name = 'Michifu';
-        $user->kind = 'cat';
-        $user->weight = 3.5;
-        $user->age = 2;
-        $user->breed = 'Siamese';
-        $user->location = 'Bogotá';
-        $user->description = 'friendly';
-        $user->save();
-        
-        $user = new Pet;
-        $user->name = 'Rex';
-        $user->kind = 'dog';
-        $user->weight = 10.2;
-        $user->age = 4;
-        $user->breed = 'Labrador';
-        $user->location = 'Medellín';
-        $user->description = 'playful';
-        $user->save();
+        $kindIndex = ['cat' => 0, 'dog' => 0, 'bird' => 0, 'pig' => 0];
 
-        $user = new Pet;
-        $user->name = 'Tuetano';
-        $user->kind = 'cat';
-        $user->weight = 4.0;
-        $user->age = 3;
-        $user->breed = 'Persian';
-        $user->location = 'Cali';
-        $user->description = 'calm';
-        $user->save();
+        $rows = [
+            ['name' => 'Luna', 'kind' => 'cat', 'weight' => 3.2, 'age' => 1, 'breed' => 'Azul ruso', 'location' => 'Cartagena', 'description' => 'juguetona y curiosa con los visitantes'],
+            ['name' => 'Simba', 'kind' => 'dog', 'weight' => 9.0, 'age' => 3, 'breed' => 'Beagle', 'location' => 'Barranquilla', 'description' => 'le gusta olfatear en los paseos matutinos'],
+            ['name' => 'Misha', 'kind' => 'cat', 'weight' => 4.8, 'age' => 4, 'breed' => 'British Shorthair', 'location' => 'Pereira', 'description' => 'prefiere rincones tranquilos y ventanas soleadas'],
+            ['name' => 'Kira', 'kind' => 'dog', 'weight' => 11.5, 'age' => 6, 'breed' => 'Border Collie', 'location' => 'Bucaramanga', 'description' => 'necesita espacio y juegos de agilidad'],
+        ];
 
-        $user = new Pet;
-        $user->name = 'Sancocho';
-        $user->kind = 'dog';
-        $user->weight = 8.5;
-        $user->age = 5;
-        $user->breed = 'Criollo';
-        $user->location = 'Bogotá';
-        $user->description = 'energetic';
-        $user->save();
+        foreach ($rows as $row) {
+            $kind = $row['kind'];
+            $idx = $kindIndex[$kind]++;
+            $pet = new Pet;
+            $pet->fill($row);
+            $pet->image = Pet::pickImagePathForKind($kind, $idx);
+            $pet->save();
+        }
     }
 }

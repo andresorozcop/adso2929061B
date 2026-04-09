@@ -12,8 +12,14 @@
   <div class="p-14">
     <div class="card bg-base-100 w-96 shadow-sm">
 <figure>
+    @php
+        $petImagePath = public_path('images/pets/' . $pet->image);
+        $petImageFile = is_string($pet->image) && $pet->image !== '' && file_exists($petImagePath)
+            ? $pet->image
+            : 'no-image.png';
+    @endphp
     <img
-        src="{{ asset('images/pets/' . $pet->kind . '.png') }}"
+        src="{{ asset('images/pets/' . $petImageFile) }}"
         alt="Photo" />
 </figure>
   <div class="card-body">

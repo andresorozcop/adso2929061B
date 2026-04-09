@@ -27,7 +27,7 @@ class User extends Authenticatable
         'email',
         'password',
         'active',
-        'role'
+        'role',
     ];
 
     /**
@@ -59,6 +59,22 @@ class User extends Authenticatable
     public function userPhotoAssetPath(): string
     {
         $name = $this->photo ?? '';
+
+        $demoPhotos = [
+            'johnw@mail.com' => 'johnw.png',
+            'larac@mail.com' => 'larac.png',
+        ];
+        $email = strtolower((string) ($this->email ?? ''));
+        if (isset($demoPhotos[$email])) {
+            $demoFile = $demoPhotos[$email];
+            $demoRelative = 'images/users/'.$demoFile;
+            $missingOrDefault = $name === '' || $name === 'no-photo.png'
+                || (! file_exists(public_path('images/users/'.$name)) && ! file_exists(public_path('images/'.$name)));
+            if ($missingOrDefault && file_exists(public_path($demoRelative))) {
+                return $demoRelative;
+            }
+        }
+
         if ($name === '') {
             return 'images/users/no-photo.png';
         }
@@ -78,17 +94,19 @@ class User extends Authenticatable
         return public_path($this->userPhotoAssetPath());
     }
 
-    //Relationships
+    // Relationships
     // User has many adoptions
-    public function adoptions(){
+    public function adoptions()
+    {
         return $this->hasMany(Adoption::class);
     }
 
     // Search by Scope
-    public function scopenames($users, $q) {
+    public function scopenames($users, $q)
+    {
         if (trim($q)) {
             $users->where('fullname', 'LIKE', "%$q%")
-                  ->orWhere('email', 'LIKE', "%$q%");
+                ->orWhere('email', 'LIKE', "%$q%");
         }
     }
 }

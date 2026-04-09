@@ -59,7 +59,7 @@
                 </div>
                 <div class="w-full md:w-[320px]">
                     <label class="label text-white">Name:</label>
-                    <input type="text" class="input bg-[#0009] outline-0" name="name" placeholder="Luna" value="{{ old('name') }}">
+                    <input type="text" class="input bg-[#0009] outline-0" name="name" placeholder="Canelón" value="{{ old('name') }}">
                     @error('name')
                         <small class="badge badge-error w-full mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
@@ -75,29 +75,29 @@
                         <small class="badge badge-error w-full mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
                     <label class="label text-white">Weight:</label>
-                    <input type="text" class="input bg-[#0009] outline-0" name="weight" placeholder="5.5" value="{{ old('weight') }}">
+                    <input type="text" class="input bg-[#0009] outline-0" name="weight" placeholder="7.25" value="{{ old('weight') }}">
                     @error('weight')
                         <small class="badge badge-error w-full mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
                     <label class="label text-white">Age:</label>
-                    <input type="number" class="input bg-[#0009] outline-0" name="age" placeholder="3" value="{{ old('age') }}">
+                    <input type="number" class="input bg-[#0009] outline-0" name="age" placeholder="8" value="{{ old('age') }}">
                     @error('age')
                         <small class="badge badge-error w-full mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="w-full md:w-[320px]">
                     <label class="label text-white">Breed:</label>
-                    <input type="text" class="input bg-[#0009] outline-0" name="breed" placeholder="Labrador" value="{{ old('breed') }}">
+                    <input type="text" class="input bg-[#0009] outline-0" name="breed" placeholder="Siamés" value="{{ old('breed') }}">
                     @error('breed')
                         <small class="badge badge-error w-full mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
                     <label class="label text-white">Location:</label>
-                    <input type="text" class="input bg-[#0009] outline-0" name="location" placeholder="Bogotá" value="{{ old('location') }}">
+                    <input type="text" class="input bg-[#0009] outline-0" name="location" placeholder="Ibagué" value="{{ old('location') }}">
                     @error('location')
                         <small class="badge badge-error w-full mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror
                     <label class="label text-white">Description:</label>
-                    <textarea name="description" class="textarea bg-[#0009] outline-0 w-full min-h-24" placeholder="Friendly pet">{{ old('description') }}</textarea>
+                    <textarea name="description" class="textarea bg-[#0009] outline-0 w-full min-h-24" placeholder="Muy juguetón con extraños">{{ old('description') }}</textarea>
                     @error('description')
                         <small class="badge badge-error w-full mt-1 text-xs py-4">{{ $message }}</small>
                     @enderror

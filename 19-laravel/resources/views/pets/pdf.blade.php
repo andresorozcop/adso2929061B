@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PDF</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; font-size: 11px; font-family: DejaVu Sans, sans-serif; }
+        th { background-color: #e8e8e8; padding: 6px 8px; text-align: left; border: 1px solid #ccc; }
+        td { padding: 5px 8px; border: 1px solid #ddd; vertical-align: top; }
+        .row-alt { background-color: #f5f5f5; }
+    </style>
 </head>
 <body>
     <table>
@@ -24,7 +30,7 @@
         </thead>
         <tbody>
             @foreach($pets as $pet)
-                <tr>
+                <tr class="{{ $loop->iteration % 2 === 0 ? 'row-alt' : '' }}">
                     <td>{{$pet->id}}</td>
                     <td>{{$pet->name}}</td>
                     <td>{{$pet->kind}}</td>
